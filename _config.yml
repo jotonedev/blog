@@ -1,0 +1,33 @@
+# Site settings
+# These are used to personalize your new site. If you look in the HTML files,
+# you will see them accessed via {{ site.title }}, {{ site.email }}, and so on.
+# You can create any custom variable you would like, and they will be accessible
+# in the templates via {{ site.myvariable }}.
+
+title: Jotone's Blog
+email: webmaster@jotone.eu
+description: "This is the personal blog of John Toniutti."
+baseurl: "" # the subpath of your site, e.g. /blog
+url: "https://jotone.eu" # the base hostname & protocol for your site, e.g. http://example.com
+github_username:  jotonedev
+
+incremental: true
+
+# Build settings
+theme: jotone_theme
+plugins:
+  - jekyll-feed
+  - jekyll-sitemap
+
+# Exclude from processing.
+exclude:
+  - .sass-cache/
+  - .jekyll-cache/
+  - Gemfile
+  - Gemfile.lock
+  - LICENSE
+  - README.md
+  - screenshot.png
+
+linkedin_url: "https://www.linkedin.com/in/john-toniutti"
+github_url: "https://github.com/jotonedev"
