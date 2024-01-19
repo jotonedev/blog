@@ -3,7 +3,9 @@ layout: post
 title:  "First post!"
 subtitle: "Written in Go."
 date:   2023-01-16 17:40:28 +0100
-categories: website
+image:
+    path: /assets/images/golang.jpg
+    alt: golang logo
 ---
 
 ## What is this?

@@ -2,7 +2,8 @@ source "https://rubygems.org"
 gem "jekyll", "~> 4.3"
 
 # Theme
-gem "jekyll-theme-tallneck", path: "../tallneck"
+gem "jekyll-remote-theme"
+gem "jekyll-theme-tallneck"
 
 # Windows and JRuby does not include zoneinfo files, so bundle the tzinfo-data gem
 # and associated library.

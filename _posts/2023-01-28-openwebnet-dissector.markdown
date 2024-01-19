@@ -1,9 +1,11 @@
 ---
 layout: post
-title:  "An Open Web Net dissector for Wireshark"
+title:  "An OpenWebNet dissector for Wireshark"
 subtitle: "I recently noted there is no dissector yet for the protocol OpenWebNet. So, I developed one."
 date:   2023-01-28 16:11:44 +0100
-categories: wireshark network
+image:
+    path: /assets/images/openwebnet_dissector.png
+    alt: screenshot of the dissector in action in Wireshark
 ---
 ## What is OpenWebNet
 

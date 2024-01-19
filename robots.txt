@@ -1,0 +1,18 @@
+---
+layout: none
+---
+User-agent: *
+Sitemap: {{ site.url }}/sitemap.xml
+
+User-agent: *
+Disallow: /terms
+Disallow: /cookie
+Disallow: /privacy
+
+User-agent: GPTBot
+Disallow: /
+
+User-agent: Yandex
+Disallow: /
+
+
