@@ -1,6 +1,7 @@
 ---
 layout: home
 title: Jotone's Blog
+image: "/assets/images/default.webp"
 ---
 
 Hi there!

@@ -6,7 +6,11 @@ tagline: "John's Personal Blog"
 description: "John's Personal Blog. I write mainly about my projects."
 keywords: "development, personal, projects, blog"
 
-author: John Toniutti
+author: 
+  name: John Toniutti
+  url: "https://jotone.it/about"
+  image: "/assets/images/about.webp"
+
 copyright: "Copyright (c) 2024 John Toniutti"
 
 email: "john.toniutti@gmail.com"

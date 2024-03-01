@@ -13,7 +13,7 @@ By accessing and using `jotone.it`, you agree to comply with and be bound by the
 
 ## Use of Content
 
-1. **Intellectual Property:** The content on `jotone.it`, including but not limited to text, images, graphics, and logos, is the property of [Your Name] and is protected by intellectual property laws. You may not reproduce, distribute, or display any part of this website without prior written permission.
+1. **Intellectual Property:** The content on `jotone.it`, including but not limited to text, images, graphics, and logos, is the property of John Toniutti and is protected by intellectual property laws. You may not reproduce, distribute, or display any part of this website without prior written permission.
 
 2. **Personal Use:** You are granted a limited license to access and use the content on `jotone.it` for personal, non-commercial purposes. This license does not permit any resale or commercial use of the website's content.
 
@@ -25,7 +25,7 @@ By accessing and using `jotone.it`, you agree to comply with and be bound by the
 
 ## Privacy
 
-1. **Data Collection:** Please refer to our [Privacy Policy](#) for information on how we collect, use, and safeguard your personal information.
+1. **Data Collection:** Please refer to our [Privacy Policy](/privacy) for information on how we collect, use, and safeguard your personal information.
 
 ## Third-Party Links
 

@@ -1,6 +1,6 @@
 ---
 title:  "Tallneck improved"
-date:   2024-01-12 13:58:28 +0100
+date:   2024-03-01 14:24:28 +0100
 ---
 
 I've rewritten the entire theme with the objective of making it more readable and faster. I've also improved the design to make it more appealing.
