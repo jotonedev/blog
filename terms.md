@@ -1,8 +1,10 @@
 ---
-layout: page
+layout: post
 title: Terms of service
 permalink: /terms
 sitemap: false
+private: true
+no_meta: true
 ---
 
 **Effective Date:** 18-01-2024

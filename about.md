@@ -1,21 +1,31 @@
 ---
-layout: page
-title: About
+layout: about
+title: About me
 permalink: /about
+image: /assets/images/about.webp
 ---
 
-Hi everyone!
+Hi,
+I'm John.
 
-This is my personal blog. This is where I write about my personal projects and other things that I find interesting.
+I'm a computer science student at [University of Udine](https://www.uniud.it) in Italy.
 
-About me:
+I have always been passionate about everything related to computers and technology in general. But, over the years, I discovered a passion for network applications and cybersecurity.
 
-- I'm a computer science student at the University of Udine
-- I live in Italy
-- I love programming and I'm always looking for new things to learn
+I've participated in various courses and competitions. One of the most important courses I've attended is the [CyberChallenge.IT](https://cyberchallenge.it) (2021) course and the [OliCyber](https://olicyber.it) (2022 & 2023), where I learned the basics of cybersecurity and participated in the national competition.
+
+In 2023, I've joined the [UniUD E-Racing team](https://formulasae.uniud.it/), where I manage the telemetry server.
+
+Also, I have learned various programming languages over the years, like C++, Python and Go. But my favourite is Python, and I closely follow the development of the language.
+
+## Social
 
 You can find me on:
 
 - [GitHub](https://github.com/jotonedev)
 - [CTFTime](https://ctftime.org/user/104016)
 - [LinkedIn](https://www.linkedin.com/in/john-toniutti/)
+
+## Contact
+
+If you want to contact me, you can send me an email at [john.toniutti (at) gmail.com](mailto:john.toniutti@gmail.com)

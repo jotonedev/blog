@@ -3,9 +3,7 @@ layout: post
 title:  "New website!"
 subtitle: "Now running on Cloudflare pages"
 date:   2024-01-12 13:58:28 +0100
-image:
-    path: /assets/images/jekyll_banner.png
-    alt: jekyll logo
+image: /assets/images/posts/jekyll_banner.avif
 ---
 ## Why?
 

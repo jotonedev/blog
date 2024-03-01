@@ -1,0 +1,49 @@
+{
+    "name": "Jotone's Blog",
+    "short_name": "Jotone's Blog",
+    "lang": "en",
+    "description": "John's Personal Blog. I write mainly about my projects.",
+    "categories": ["developer", "development", "network", "networking"],
+    "start_url": "/",
+    "icons": [
+        {
+            "src": "/assets/images/pwa_icon.svg",
+            "sizes": "any",
+            "type": "image/svg+xml",
+            "purpose": "any"
+        },
+        {
+            "src": "/assets/images/logo.svg",
+            "sizes": "any",
+            "type": "image/svg+xml",
+            "purpose": "monochrome"
+        },
+        {
+            "src": "/assets/images/pwa_icon.svg",
+            "sizes": "any",
+            "type": "image/svg+xml",
+            "purpose": "maskable"
+        },
+        {
+            "src": "/assets/images/pwa_icon_x96.png",
+            "sizes": "96x96",
+            "type": "image/png",
+            "purpose": "maskable"
+        },
+        {
+            "src": "/assets/images/pwa_icon_x128.png",
+            "sizes": "128x128",
+            "type": "image/png",
+            "purpose": "maskable"
+        },
+        {
+            "src": "/assets/images/pwa_icon_x512.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "maskable"
+        }
+    ],
+    "theme_color": "#282828",
+    "background_color": "#282828",
+    "display": "standalone"
+}

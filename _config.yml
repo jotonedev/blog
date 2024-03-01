@@ -1,61 +1,55 @@
-# Site settings
-# These are used to personalize your new site. If you look in the HTML files,
-# you will see them accessed via {{ site.title }}, {{ site.email }}, and so on.
-# You can create any custom variable you would like, and they will be accessible
-# in the templates via {{ site.myvariable }}.
-
 title: Jotone's Blog
-email: john.toniutti@gmail.com
-github_username:  jotonedev
-copyright: Copyright © 2024
-author: John Toniutti
-tagline: John's Personal Blog
-description: "John's Personal Blog. I write mainly about my projects."
-baseurl: "" # the subpath of your site, e.g. /blog
+language: en
 url: "https://jotone.it"
-logo: "/favicon.svg"
-favicon: "/favicon.svg"
-favicon_ico: "/favicon.ico"
+
+tagline: "John's Personal Blog"
+description: "John's Personal Blog. I write mainly about my projects."
+keywords: "development, personal, projects, blog"
+
+author: John Toniutti
+copyright: "Copyright (c) 2024 John Toniutti"
+
+email: "john.toniutti@gmail.com"
+github_url: https://github.com/jotonedev
+linkedin_url: https://www.linkedin.com/in/john-toniutti/
+telegram_url: https://t.me/joto34
+
+defaults:
+  - scope:
+      type: "posts"
+    values:
+      layout: "post"
+      image: "/assets/images/default.webp"
+      seo:
+        type: BlogPosting
+
+# Analytics
+cloudflare: "aa3b155a9c5b4f08b2aa4e6e69f7a76a"
+
+# Plugin settings
+seo:
+  type: BlogPosting
+social: 
+  name: John Toniutti
+  links:
+    - https://github.com/jotonedev
+    - https://www.linkedin.com/in/john-toniutti/
+
+feed:
+  posts_limit: 20
+  excerpt_only: true
+  disable_in_development: true
+
+sass:
+  style: compressed
+  sass_dir: _sass
 
 sitemap: true
 
 # Build settings
 theme: jekyll-theme-tallneck
 plugins:
-  - jekyll-toc
+  - jekyll-feed
   - jekyll-seo-tag
   - jekyll-sitemap
   - jekyll-remote-theme
-
-# SEO settings
-social:
-  name: John Toniutti
-  links:
-    - https://www.linkedin.com/in/john-toniutti/
-    - https://github.com/jotonedev
-    - https://ctftime.org/user/104016
-
-# Table of contents settings
-toc:
-  min_level: 2
-  max_level: 3
-
-# Default values
-defaults:
-  - scope:
-      path: "posts"
-    values:
-      toc: true
-
-# Exclude from processing.
-exclude:
-  - .sass-cache/
-  - .jekyll-cache/
-  - Gemfile
-  - Gemfile.lock
-  - LICENSE
-  - README.md
-  - screenshot.png
-
-linkedin_url: "https://www.linkedin.com/in/john-toniutti"
-github_url: "https://github.com/jotonedev"

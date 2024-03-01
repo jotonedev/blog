@@ -1,8 +1,10 @@
 ---
-layout: page
+layout: post
 title: Cookie Policy
 permalink: /cookie
 sitemap: false
+private: true
+no_meta: true
 ---
 
 This document informs Users about the technologies that help this Application to achieve the purposes described below. Such technologies allow the Owner to access and store information (for example by using a Cookie) or use resources (for example by running a script) on a User’s device as they interact with this Application.

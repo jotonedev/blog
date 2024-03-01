@@ -1,8 +1,10 @@
 ---
-layout: page
+layout: post
 title: Privacy policy
 permalink: /privacy
 sitemap: false
+private: true
+no_meta: true
 ---
 
 This Application collects some Personal Data from its Users.
