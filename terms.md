@@ -7,15 +7,9 @@ private: true
 no_meta: true
 ---
 
-**Effective Date:** 18-01-2024
+**Effective Date:** 08-03-2024
 
 By accessing and using `jotone.it`, you agree to comply with and be bound by the following Terms of Service. If you do not agree with these terms, please do not use this website.
-
-## Use of Content
-
-1. **Intellectual Property:** The content on `jotone.it`, including but not limited to text, images, graphics, and logos, is the property of John Toniutti and is protected by intellectual property laws. You may not reproduce, distribute, or display any part of this website without prior written permission.
-
-2. **Personal Use:** You are granted a limited license to access and use the content on `jotone.it` for personal, non-commercial purposes. This license does not permit any resale or commercial use of the website's content.
 
 ## User Conduct
 
@@ -23,19 +17,11 @@ By accessing and using `jotone.it`, you agree to comply with and be bound by the
 
 2. **User Responsibility:** You are responsible for the accuracy and legality of the information you submit to `jotone.it`. You agree not to impersonate any person or entity or provide false information about yourself.
 
-## Privacy
-
-1. **Data Collection:** Please refer to our [Privacy Policy](/privacy) for information on how we collect, use, and safeguard your personal information.
-
-## Third-Party Links
-
-1. **External Links:** `jotone.it` may contain links to third-party websites. We do not endorse or control the content of these websites and are not responsible for their content or practices. Your use of third-party websites is at your own risk.
-
 ## Limitation of Liability
 
 1. **No Warranty:** `jotone.it` is provided "as is" without any warranties, expressed or implied. We do not warrant the accuracy, completeness, or reliability of the content on this website.
 
-2. **Limitation of Liability:** In no event shall [Your Name] be liable for any damages, including without limitation, direct, indirect, incidental, special, consequential, or punitive damages arising out of your use or inability to use `jotone.it`.
+2. **Limitation of Liability:** In no event shall John Toniutti be liable for any damages, including without limitation, direct, indirect, incidental, special, consequential, or punitive damages arising out of your use or inability to use `jotone.it`.
 
 ## Changes to Terms
 
