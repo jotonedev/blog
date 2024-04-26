@@ -1,10 +1,11 @@
 ---
 layout: post
 title:  "First post!"
-subtitle: "Written in Go."
 date:   2023-01-16 17:40:28 +0100
 image: /assets/images/posts/golang.avif
 ---
+
+Written in Go.
 
 ## What is this?
 This is my first website project developed using the Go programming language, so I opted to develop a blog where I can share my various project (*maybe*).
