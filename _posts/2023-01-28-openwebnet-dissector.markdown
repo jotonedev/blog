@@ -1,10 +1,12 @@
 ---
 layout: post
 title:  "An OpenWebNet dissector for Wireshark"
-subtitle: "I recently noted there is no dissector yet for the protocol OpenWebNet. So, I developed one."
 date:   2023-01-28 16:11:44 +0100
 image: /assets/images/posts/openwebnet_dissector.avif
 ---
+
+I recently noted there is no dissector yet for the protocol OpenWebNet. So, I developed one.
+
 ## What is OpenWebNet
 
 [OpenWebNet](https://en.wikipedia.org/wiki/OpenWebNet) is a protocol developed by Bticino used for controlling their MyHome system. With this protocol, you can send commands to gateways or _touchscreens_ (touchscreens are just hidden gateways with also more features). What they do is translate the OpenWebNet messages to signals on the [SCS Bus](https://en.wikipedia.org/wiki/Bus_SCS) and the other way around.
