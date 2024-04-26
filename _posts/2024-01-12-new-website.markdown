@@ -1,10 +1,12 @@
 ---
 layout: post
 title:  "New website!"
-subtitle: "Now running on Cloudflare pages"
 date:   2024-01-12 13:58:28 +0100
 image: /assets/images/posts/jekyll_banner.avif
 ---
+
+Now running on Cloudflare pages.
+
 ## Why?
 
 I decided to move from my golang website to a Jekyll website because I had numerous problems with my old solution. For example, sometimes the database would not work so the entire website would go offline.
