@@ -1,0 +1,58 @@
+---
+title:  "PyOWN development"
+date:   2024-11-07 21:32:28 +0100
+image: /assets/images/openwebnet_pyown.webp
+---
+
+Long time no see!
+
+In the last weeks I've been working on a new project called PyOWN. It's a Python library to interact with the OpenWebNet protocol, which is used in home automation systems like MyHome by Legrand.
+
+The library is still in development, but it already has some features implemented. You can check the code on [GitHub](https://github.com/jotonedev/pyown)
+
+## Why I'm doing this?
+
+So, for some time I've been wanting to start a serious project in Python. I've been using Python for quite a few years now, but everything I've done so far has been abandoned or is just something that I use for myself. I wanted to do something that could be useful for other people. So, why not implement some obscure protocol that nobody uses? Well, I don't know, but I'm doing it anyway.
+
+Also, I have a MyHome system at home and I wanted to be able to control it from my computer. I've tried some other libraries, but none of them worked for me. So, I decided to write my own.
+
+## What is OpenWebNet?
+
+OpenWebNet is a protocol used and invented by Bticino, a company that is now part of the Legrand group. It's used in home automation systems like MyHome, which is what I have at home.
+Basically, allows to communicate to a gateway which then sends commands on a physical bus to the actuators.
+It's a simple protocol, but it has quite some quirks that make it a bit difficult to implement nicely.
+
+It has been invented in the 2000s and it's still used today.
+It also has a registered port in the [IANA list](https://www.iana.org/assignments/service-names-port-numbers/service-names-port-numbers.xhtml?search=0&page=42) and it is the 20005.
+But, actually, most of the systems used by default the 20000 port and use only tcp.
+I don't understand why they have registered the 20005 port for both tcp and udp.
+
+Another quirk is that not all the documentation has been released by Legrand, notably for the diagnostic (WHO=1xxx) and the load control (WHO=3) commands.
+
+If you wanna learn more about the protocol, you can check the [official documentation](https://developer.legrand.com/Documentation/) or for a more general overview the [Wikipedia page](https://en.wikipedia.org/wiki/OpenWebNet).
+
+## What's next?
+
+I will continue to work on this project for some time. I want to implement all the features that are publicly. I also want to fully document it and write some tests.
+
+Probably, after that, I will start to work on a plugin for Home Assistant because the current plugin for OpenWebNet only implements a few features and it's not maintained anymore.
+
+## Fun fact
+
+With the [MadrHacks](https://www.madrhacks.org) team, I've written a challenge for the [SnakeCTF 2023](https://github.com/MadrHacks/snakeCTF2023-Writeups) that was about the OpenWebNet protocol, more specifically on the brute-force vulnerability of the password "hashing" algorithm for sending the password over the network (the protocol is not encrypted).
+
+
+## Useful links
+
+- [PyOWN GitHub repository](https://github.com/jotonedev/pyown)
+- [Documentation of the library](https://jotonedev.github.io/pyown/)
+- [OpenWebNet protocol documentation](https://developer.legrand.com/Documentation/)
+- [Old password algorithm](https://rosettacode.org/wiki/OpenWebNet_password#Python)
+- [Wikipedia page](https://en.wikipedia.org/wiki/OpenWebNet)
+
+
+## Disclaimer
+
+- This library is not associated by any means with BTicino or Legrand companies
+- The Open Web Net protocol is maintained and Copyright by BTicino/Legrand. The documentation of the protocol if freely accessible for developers on the Legrand developer website
+- "Open Web Net", "SCS", "MyHOME_Up", "MyHOME", "MyHOME_Play" and "Living Now" are registered trademarks by BTicino/Legrand

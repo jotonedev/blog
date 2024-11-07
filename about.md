@@ -14,7 +14,7 @@ I have always been passionate about everything related to computers and technolo
 
 I've participated in various courses and competitions. One of the most important courses I've attended is the [CyberChallenge.IT](https://cyberchallenge.it) (2021) course and the [OliCyber](https://olicyber.it) (2022 & 2023), where I learned the basics of cybersecurity and participated in the national competition.
 
-In 2023, I've joined the [UniUD E-Racing team](https://formulasae.uniud.it/), where I manage the telemetry server.
+In 2023, I've joined the [UniUD E-Racing team](https://formulasae.uniud.it/), where I've managed the telemetry server.
 
 Also, I have learned various programming languages over the years, like C++, Python and Go. But my favourite is Python, and I closely follow the development of the language.
 
