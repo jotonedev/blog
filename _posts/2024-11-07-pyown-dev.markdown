@@ -49,7 +49,7 @@ With the [MadrHacks](https://www.madrhacks.org) team, I've written a challenge f
 - [OpenWebNet protocol documentation](https://developer.legrand.com/Documentation/)
 - [Old password algorithm](https://rosettacode.org/wiki/OpenWebNet_password#Python)
 - [Wikipedia page](https://en.wikipedia.org/wiki/OpenWebNet)
-
+- [Wireshark dissector](/2023/01/28/openwebnet-dissector)
 
 ## Disclaimer
 

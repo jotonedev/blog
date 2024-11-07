@@ -16,6 +16,8 @@ I've participated in various courses and competitions. One of the most important
 
 In 2023, I've joined the [UniUD E-Racing team](https://formulasae.uniud.it/), where I've managed the telemetry server.
 
+Currently, I'm part of the MadrHacks team, a CTF team composed of students from the University of Udine. We participate in various CTF competitions and organize the [SnakeCTF](https://snakectf.org/) competition.
+
 Also, I have learned various programming languages over the years, like C++, Python and Go. But my favourite is Python, and I closely follow the development of the language.
 
 ## Social
