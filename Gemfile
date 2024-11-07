@@ -3,7 +3,7 @@ gem "jekyll", "~> 4.3"
 
 # Theme
 gem "jekyll-remote-theme"
-gem "jekyll-theme-tallneck", "~> 0.2.9"
+gem "jekyll-theme-tallneck", "~> 0.2.10"
 
 # Windows and JRuby does not include zoneinfo files, so bundle the tzinfo-data gem
 # and associated library.
