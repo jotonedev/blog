@@ -1,6 +1,6 @@
 ---
 title:  "PyOWN development"
-date:   2024-11-07 21:32:28 +0100
+date:   2024-11-07 22:34:00 +0100
 image: /assets/images/openwebnet_pyown.webp
 ---
 
@@ -12,28 +12,37 @@ The library is still in development, but it already has some features implemente
 
 ## Why I'm doing this?
 
-So, for some time I've been wanting to start a serious project in Python. I've been using Python for quite a few years now, but everything I've done so far has been abandoned or is just something that I use for myself. I wanted to do something that could be useful for other people. So, why not implement some obscure protocol that nobody uses? Well, I don't know, but I'm doing it anyway.
+I've been wanting to start a serious Python project for some time. I've been using Python for quite a few years now, but everything I've done so far has been abandoned or is just something that I use for myself. I wanted to do something that could be useful for other people. So, why not implement some obscure protocol that nobody uses? Well, I don't know, but I'm doing it anyway.
 
 Also, I have a MyHome system at home and I wanted to be able to control it from my computer. I've tried some other libraries, but none of them worked for me. So, I decided to write my own.
 
 ## What is OpenWebNet?
 
 OpenWebNet is a protocol used and invented by Bticino, a company that is now part of the Legrand group. It's used in home automation systems like MyHome, which is what I have at home.
-Basically, allows to communicate to a gateway which then sends commands on a physical bus to the actuators.
-It's a simple protocol, but it has quite some quirks that make it a bit difficult to implement nicely.
-
-It has been invented in the 2000s and it's still used today.
+Basically, it allows communication with a gateway which then sends commands on a physical bus to the actuators.
+It was invented in the 2000s and it's still used today.
 It also has a registered port in the [IANA list](https://www.iana.org/assignments/service-names-port-numbers/service-names-port-numbers.xhtml?search=0&page=42) and it is the 20005.
-But, actually, most of the systems used by default the 20000 port and use only tcp.
-I don't understand why they have registered the 20005 port for both tcp and udp.
+However, most systems by default use port 20000 and no system supports the UDP protocol.
+I don't understand why they have registered the 20005 port for both TCP and UDP.
 
-Another quirk is that not all the documentation has been released by Legrand, notably for the diagnostic (WHO=1xxx) and the load control (WHO=3) commands.
+It's a simple protocol, but it has quite some quirks that makes it a bit difficult to implement nicely.
 
-If you wanna learn more about the protocol, you can check the [official documentation](https://developer.legrand.com/Documentation/) or for a more general overview the [Wikipedia page](https://en.wikipedia.org/wiki/OpenWebNet).
+For example, the protocol consists of strings of numbers separated by asterisk or hashtag, like `*1*0*11##` which means "turn off the light in the area 1 point 1 ".
+The fact that is composed of strings makes it difficult to implement in a language without a good string manipulation library, like C. But in Python, it's somewhat easier.
+There are still some difficulties regarding the documentation: not all features are documented, and the ones that are documented are not always clear.
+
+## Message syntax
+
+There are several types of messages that can be sent to the gateway, then there are also system messages used for handshaking and acknowledgment that follow a unique syntax.
+But, they all follow the pattern. `*tag1*tag2*tag3*tagN##`.
+Each tag is a number and can optionally have arguments separated by '#' that are also numbers.
+In some cases, tags are also optional, like in this case: `*#*0##` which is the NACK message, `*#13**10##` which is a command for the gateway.
+
+If you want to learn more about the protocol, you can check the [official documentation](https://developer.legrand.com/Documentation/) or for a more general overview the [Wikipedia page](https://en.wikipedia.org/wiki/OpenWebNet).
 
 ## What's next?
 
-I will continue to work on this project for some time. I want to implement all the features that are publicly. I also want to fully document it and write some tests.
+I will continue to work on this project for some time. I want to implement all the publicly documented features. I also want to fully document it and write some tests.
 
 Probably, after that, I will start to work on a plugin for Home Assistant because the current plugin for OpenWebNet only implements a few features and it's not maintained anymore.
 
