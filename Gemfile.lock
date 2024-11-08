@@ -72,7 +72,7 @@ GEM
       jekyll (>= 3.8, < 5.0)
     jekyll-sitemap (1.4.0)
       jekyll (>= 3.7, < 5.0)
-    jekyll-theme-tallneck (0.3.0)
+    jekyll-theme-tallneck (0.3.1)
       jekyll (>= 4.0, < 5.0)
       jekyll-feed (>= 0.17, < 1.0)
       jekyll-seo-tag (>= 2.8, < 3.0)
