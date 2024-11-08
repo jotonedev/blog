@@ -24,6 +24,7 @@ defaults:
     values:
       layout: "post"
       image: "/assets/images/default.webp"
+      permalink: :path/:title
       seo:
         type: BlogPosting
 
