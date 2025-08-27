@@ -18,6 +18,8 @@ In 2023, I've joined the [UniUD E-Racing team](https://formulasae.uniud.it/), wh
 
 Currently, I'm part of the MadrHacks team, a CTF team composed of students from the University of Udine. We participate in various CTF competitions and organize the [SnakeCTF](https://snakectf.org/) competition.
 
+During the 2025 summer, I've been a Software Engineer intern at Uber in Amsterdam. I was in the In Person Payments team, where we manage all the cash and qr payments at Uber.
+
 Also, I have learned various programming languages over the years, like C++, Python and Go. But my favourite is Python, and I closely follow the development of the language.
 
 ## Social
