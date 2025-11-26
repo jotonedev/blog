@@ -5,7 +5,6 @@ image: /assets/images/posts/snakectf_2025_finals_01.avif
 ---
 
 Hi everyone!
-
 Last week I took part in the SnakeCTF 2025 Finals as one of the organizers (_not the team [organizers](https://ctftime.org/team/42934)_).
 It took place in Lignano Sabbiadoro, in Italy, from November 20 to November 23.
 It consisted of two sub-events: the main jeopardy CTF event and the [Real World CTF](https://snakectf.org/signup#real-world-ctf).
@@ -22,6 +21,6 @@ Creating it allowed me to learn how products like the [Nest Mini](https://store.
 Overall, SnakeCTF 2025 Finals was a fantastic experience. I am proud of the challenges I created and the opportunity to share my work and contribute to such a high-quality event. I’m already looking forward to future editions.
 
 If you want to learn more about the event, please check out our [website](https://snakectf.org/).
-You can find the scoreboard for the event [here](https://ctftime.org/event/2994).
+You can find the scoreboard for the event on [CTFtime](https://ctftime.org/event/2994).
 
 ![Group photo with all the participants](/assets/images/posts/snakectf_2025_finals_02.avif)
