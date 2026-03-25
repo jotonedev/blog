@@ -29,6 +29,7 @@ You can find me on:
 - [GitHub](https://github.com/jotonedev)
 - [CTFTime](https://ctftime.org/user/104016)
 - [LinkedIn](https://www.linkedin.com/in/john-toniutti/)
+- [Resume](/assets/resume.pdf)
 
 ## Contact
 
