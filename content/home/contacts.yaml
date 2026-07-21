@@ -1,0 +1,9 @@
+contacts:
+  - platform: Email
+    url: mailto:contact@jotone.it
+
+  - platform: GitHub
+    url: https://github.com/jotonedev
+
+  - platform: LinkedIn
+    url: https://www.linkedin.com/in/john-toniutti/

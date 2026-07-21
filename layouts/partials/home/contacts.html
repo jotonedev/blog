@@ -1,0 +1,15 @@
+<section class="contacts" id="home.contacts">
+    {{ $home := site.GetPage "/home" }}
+    {{ with $home.Resources.GetMatch "contacts.yaml" }}
+        {{ $data := .Content | transform.Unmarshal }}
+        <div class="contacts-list">
+            {{ range $data.contacts }}
+                <div class="contact-item">
+                    <a href="{{ .url }}" target="_blank" rel="noopener noreferrer">
+                        <strong>{{ .platform }}</strong>
+                    </a>
+                </div>
+            {{ end }}
+        </div>
+    {{ end }}
+</section>
