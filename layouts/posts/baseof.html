@@ -4,6 +4,7 @@
     <body a="{{ $.Site.Params.theme_config.appearance | default "auto" }}">
         <main class="page-content" aria-label="Content">
             <div class="w">
+                {{- partial "nav.html" . -}}
                 <div class="post-meta">
                     {{ partial "back_link.html" .}}
                     <p>
@@ -13,6 +14,7 @@
                     </p>
                 </div>
                 {{- block "main" . }}{{- end }}
+                {{ partial "footer.html" }}
             </div>
         </main>
     </body>
