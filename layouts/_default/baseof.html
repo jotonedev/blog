@@ -4,7 +4,7 @@
 <body>
     <a class="skip-link" href="#main">Skip to content</a>
     <main id="main" class="page-content">
-        <div class="w">
+        <div class="w{{ if .Params.wide }} w-wide{{ end }}">
             {{- partial "nav.html" . -}}
             {{- block "main" . }}{{- end }}
             {{- partial "footer.html" . -}}

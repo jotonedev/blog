@@ -1,7 +1,9 @@
 <nav class="top-nav" aria-label="Main">
     <div class="nav-container">
         {{- $isPosts := eq .Section "posts" }}
+        {{- $isPhotos := eq .Section "photos" }}
         <a href="{{ "/" | relURL }}" class="nav-button{{ if .IsHome }} active{{ end }}"{{ if .IsHome }} aria-current="page"{{ end }}>Home</a>
         <a href="{{ "/posts/" | relURL }}" class="nav-button{{ if $isPosts }} active{{ end }}"{{ if $isPosts }} aria-current="page"{{ end }}>Posts</a>
+        <a href="{{ "/photos/" | relURL }}" class="nav-button{{ if $isPhotos }} active{{ end }}"{{ if $isPhotos }} aria-current="page"{{ end }}>Photos</a>
     </div>
 </nav>

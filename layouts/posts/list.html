@@ -1,8 +1,8 @@
 {{ define "main" }}
-<div class="posts-page-header">
+<div class="page-heading">
     <h1>{{ .Title }}</h1>
     {{- with .Content }}
-    <div class="posts-page-description">{{ . }}</div>
+    <div class="page-heading-description">{{ . }}</div>
     {{- end }}
 </div>
 

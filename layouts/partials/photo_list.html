@@ -1,0 +1,135 @@
+{{- /*
+  Renders the photo feed, newest first.
+
+  Images come from photos/ (mounted at assets/photos), metadata from
+  data/photos.yaml. Capture date and camera fall back to the file's own EXIF
+  whenever the YAML entry leaves them out, so the usual case is one short entry
+  per photo carrying only alt text and a location.
+*/ -}}
+
+{{- /* Widths generated for the feed. The container is 880px, so 1760 covers a
+       2x display; anything wider than the source is skipped rather than upscaled. */ -}}
+{{- $widths := slice 480 880 1320 1760 -}}
+{{- $sizes := "(max-width: 928px) calc(100vw - 3rem), 880px" -}}
+
+{{- $items := slice -}}
+{{- range hugo.Data.photos -}}
+  {{- if not .file -}}
+    {{- warnf "photo_list: entry in data/photos.yaml has no `file` key, skipping" -}}
+  {{- else -}}
+    {{- $img := resources.Get (printf "photos/%s" .file) -}}
+    {{- if not $img -}}
+      {{- warnf "photo_list: %q is listed in data/photos.yaml but missing from photos/" .file -}}
+    {{- else if ne $img.ResourceType "image" -}}
+      {{- warnf "photo_list: %q is not an image" .file -}}
+    {{- else -}}
+
+      {{- /* Capture date: YAML wins, EXIF fills in. Photos with no EXIF report a
+             zero time, which is truthy in a template, so test it explicitly. */ -}}
+      {{- $date := "" -}}
+      {{- with .date }}{{ $date = time.AsTime . }}{{ end -}}
+      {{- if not $date -}}
+        {{- with $img.Meta }}{{ if not .Date.IsZero }}{{ $date = .Date }}{{ end }}{{ end -}}
+      {{- end -}}
+      {{- if not $date -}}
+        {{- warnf "photo_list: %q has no `date` in data/photos.yaml and none in its EXIF, so it sorts last" .file -}}
+      {{- end -}}
+
+      {{- /* Camera: YAML wins, else EXIF make + model. Models often already carry
+             the make ("Canon EOS R6"), so only prepend it when they do not. */ -}}
+      {{- $device := .device | default "" -}}
+      {{- if not $device -}}
+        {{- $make := "" -}}
+        {{- $model := "" -}}
+        {{- with $img.Meta -}}
+          {{- with .Exif.Make }}{{ $make = title (lower (trim (string .) " ")) }}{{ end -}}
+          {{- with .Exif.Model }}{{ $model = trim (string .) " " }}{{ end -}}
+        {{- end -}}
+        {{- if and $make $model -}}
+          {{- $device = cond (hasPrefix (lower $model) (lower $make)) $model (printf "%s %s" $make $model) -}}
+        {{- else -}}
+          {{- $device = or $model $make -}}
+        {{- end -}}
+      {{- end -}}
+
+      {{- if not .alt -}}
+        {{- warnf "photo_list: %q has no alt text in data/photos.yaml" .file -}}
+      {{- end -}}
+
+      {{- /* Sorting on a formatted timestamp keeps undated photos (empty key)
+             out of the way at the end of the feed. */ -}}
+      {{- $sortkey := "" -}}
+      {{- with $date }}{{ $sortkey = .Format "2006-01-02T15:04:05" }}{{ end -}}
+
+      {{- $items = $items | append (dict
+        "img" $img
+        "alt" (.alt | default "")
+        "location" (.location | default "")
+        "date" $date
+        "device" $device
+        "sortkey" $sortkey
+      ) -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+
+{{- with sort $items "sortkey" "desc" }}
+<div class="photo-feed">
+  {{- range $i, $p := . }}
+  {{- $img := $p.img }}
+
+  {{- /* Never upscale: drop any target wider than the source, and fall back to
+         the source width for photos smaller than the narrowest step. */ -}}
+  {{- $chosen := slice }}
+  {{- range $widths }}{{ if le . $img.Width }}{{ $chosen = $chosen | append . }}{{ end }}{{ end }}
+  {{- if not $chosen }}{{ $chosen = slice $img.Width }}{{ end }}
+
+  {{- $avif := slice }}
+  {{- $webp := slice }}
+  {{- range $chosen }}
+    {{- $a := $img.Resize (printf "%dx avif q70" .) }}
+    {{- $avif = $avif | append (printf "%s %dw" $a.RelPermalink $a.Width) }}
+    {{- $w := $img.Resize (printf "%dx webp q85" .) }}
+    {{- $webp = $webp | append (printf "%s %dw" $w.RelPermalink $w.Width) }}
+  {{- end }}
+  {{- $fallback := $img.Resize (printf "%dx jpg q85" (index $chosen (sub (len $chosen) 1))) }}
+
+  {{- /* Full-size view: a high-quality 2560px rendition, so the original master
+         file never has to be published. Pointless when the source is no bigger
+         than what the feed already shows. */ -}}
+  {{- $full := "" }}
+  {{- if gt $img.Width 880 }}{{ $full = $img.Resize (printf "%dx webp q90" (cond (gt $img.Width 2560) 2560 $img.Width)) }}{{ end }}
+
+  <figure class="photo-item">
+    {{- if $full }}
+    <a class="photo-frame" href="{{ $full.RelPermalink }}" target="_blank" rel="noopener"
+       aria-label="Open full-size photo{{ with $p.location }} taken in {{ . }}{{ end }} in a new tab">
+    {{- else }}
+    <div class="photo-frame">
+    {{- end }}
+      <picture>
+        <source type="image/avif" srcset="{{ delimit $avif ", " }}" sizes="{{ $sizes }}">
+        <source type="image/webp" srcset="{{ delimit $webp ", " }}" sizes="{{ $sizes }}">
+        <img src="{{ $fallback.RelPermalink }}" alt="{{ $p.alt }}"
+             width="{{ $fallback.Width }}" height="{{ $fallback.Height }}"
+             {{ if eq $i 0 }}loading="eager" fetchpriority="high"{{ else }}loading="lazy"{{ end }} decoding="async">
+      </picture>
+    {{- if $full }}
+    </a>
+    {{- else }}
+    </div>
+    {{- end }}
+
+    {{- $parts := slice }}
+    {{- with $p.location }}{{ $parts = $parts | append (printf "<span class=\"photo-location\">%s</span>" (htmlEscape .)) }}{{ end }}
+    {{- with $p.date }}{{ $parts = $parts | append (printf "<time datetime=\"%s\">%s</time>" (.Format "2006-01-02") (.Format "January 2, 2006")) }}{{ end }}
+    {{- with $p.device }}{{ $parts = $parts | append (printf "<span class=\"photo-device\">%s</span>" (htmlEscape .)) }}{{ end }}
+    {{- with $parts }}
+    <figcaption class="photo-meta">{{ delimit . "<span class=\"photo-sep\" aria-hidden=\"true\">·</span>" | safeHTML }}</figcaption>
+    {{- end }}
+  </figure>
+  {{- end }}
+</div>
+{{- else }}
+<p class="photo-empty">No photos yet.</p>
+{{- end }}

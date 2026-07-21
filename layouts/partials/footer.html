@@ -1,5 +1,10 @@
 {{- if site.Params.theme_config.isShowFooter -}}
 <footer class="site-footer">
     <p>&copy; {{ now.Year }} {{ site.Params.author | default site.Title }}</p>
+    {{- /* Pages that need extra rights wording (the photo feed) declare it in
+           their own front matter, so the footer stays generic. */ -}}
+    {{- with .Params.copyright_note }}
+    <p class="footer-note">{{ . }}</p>
+    {{- end }}
 </footer>
 {{- end -}}

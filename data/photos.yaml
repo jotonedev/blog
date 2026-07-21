@@ -1,0 +1,16 @@
+# One entry per photograph in photos/. Order does not matter here — the page
+# sorts by capture date, newest first.
+#
+#   file:     required, filename inside photos/
+#   alt:      required, description for screen readers and for when the image
+#             fails to load. Not displayed on the page.
+#   location: shown in the caption
+#   date:     optional, overrides the capture date read from EXIF
+#   device:   optional, overrides the camera read from EXIF. Use it for film,
+#             scans, or when the EXIF make/model reads badly.
+#
+# Anything missing is reported as a warning at build time.
+
+# - file: 2026-05-01-trieste-sunset.jpg
+#   alt: Orange sky over a calm sea, seen from a stone pier
+#   location: Trieste, Italy
