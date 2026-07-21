@@ -1,12 +1,5 @@
 {{- /*
   Image render hook.
-
-  Local images are resolved through Hugo's asset pipeline so every <img> gets
-  intrinsic width/height (no layout shift), lazy loading, and a srcset capped at
-  1280px — the content column is 640px, so that covers 2x screens without
-  shipping the 2532px originals. Remote images pass through untouched.
-
-  A markdown title (`![alt](src "title")`) becomes a <figcaption>.
 */ -}}
 
 {{- $src := .Destination -}}
@@ -23,11 +16,16 @@
 {{- with .Title }}<figure>{{ end -}}
 {{- with $img -}}
     {{- $main := . -}}
-    {{- if gt .Width 1280 }}{{ $main = .Resize "1280x webp q85" }}{{ end -}}
+    {{- if gt .Width 1280 -}}
+        {{- $capped := .Resize "1280x webp q85" -}}
+        {{- if lt (len $capped.Content) (len .Content) }}{{ $main = $capped }}{{ end -}}
+    {{- end -}}
     {{- $srcset := slice -}}
     {{- if gt $main.Width 640 -}}
         {{- $half := $main.Resize "640x webp q85" -}}
-        {{- $srcset = slice (printf "%s 640w" $half.RelPermalink) (printf "%s %dw" $main.RelPermalink $main.Width) -}}
+        {{- if lt (len $half.Content) (len $main.Content) -}}
+            {{- $srcset = slice (printf "%s 640w" $half.RelPermalink) (printf "%s %dw" $main.RelPermalink $main.Width) -}}
+        {{- end -}}
     {{- end -}}
     <img src="{{ $main.RelPermalink }}"
         {{- with $srcset }} srcset="{{ delimit . ", " }}" sizes="(max-width: 688px) 100vw, 640px"{{ end }}
