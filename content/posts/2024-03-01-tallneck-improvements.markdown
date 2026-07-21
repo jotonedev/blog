@@ -23,4 +23,4 @@ The website now has PWA support, so you can install it on your phone or computer
 
 The lighthouse score has improved a lot. Now it has 100 in performance, 100 in accessibility, 100 in best practices, 100 in SEO and PWA support.
 
-![Lighthouse score](/assets/images/posts/tallneck_improvements/lighthouse_screenshot.webp "Lighthouse score")
+![Lighthouse score](/images/posts/tallneck_improvements/lighthouse_screenshot.webp "Lighthouse score")

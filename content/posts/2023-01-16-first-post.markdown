@@ -3,7 +3,7 @@ aliases:
   - /2023/01/16/first-post
 title:  "First post!"
 date:   2023-01-16T17:40:28+0100
-image: /assets/images/posts/golang.avif
+image: /images/posts/first-post/golang.avif
 ---
 
 Written in Go.

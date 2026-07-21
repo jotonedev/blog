@@ -3,7 +3,7 @@ aliases:
   - /2024/01/12/new-website
 title:  "New website!"
 date:   2024-01-12T13:58:28+0100
-image: /assets/images/posts/jekyll_banner.avif
+image: /images/posts/new-website/jekyll_banner.avif
 ---
 
 Now running on Cloudflare pages.

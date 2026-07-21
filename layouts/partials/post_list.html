@@ -8,13 +8,13 @@
     {{- else -}}
         {{- if (eq .context.Kind "term") -}}
             {{- $posts = .context.Data.Pages -}}
-	{{- else -}}
+        {{- else -}}
             {{- $posts = site.RegularPages }}
-	{{- end -}}
+        {{- end -}}
     {{- end -}}
 {{- end -}}
 
-{{- $limit_exceeded:= "" -}}
+{{- $limit_exceeded := "" -}}
 {{- if (and .limit (gt (len $posts) .limit)) -}}
     {{- $limit_exceeded = true -}}
 {{- else -}}
@@ -25,15 +25,24 @@
     {{- if .limit }}
         {{ $posts = (first .limit $posts ) }}
     {{ end }}
-    <ul>
+    <div class="post-cards-list">
         {{- range $post := $posts -}}
-        <li>
-            <span>{{- ($post.Date | time.Format site.Params.theme_config.date_format) }}</span>
-            <a href="{{ $post.Permalink | relURL }}">{{ $post.Title }}</a>
-        </li>
-        {{ end }}
+            <a href="{{ $post.RelPermalink }}" class="post-card-item">
+                <div class="post-card-main">
+                    <h3 class="post-card-title">{{ $post.Title }}</h3>
+                    {{ if $post.Summary }}
+                        <p class="post-card-summary">{{ $post.Summary | plainify | truncate 120 }}</p>
+                    {{ end }}
+                </div>
+                <div class="post-card-meta">
+                    <time datetime="{{ $post.Date }}">{{ $post.Date | time.Format "Jan 02, 2006" }}</time>
+                </div>
+            </a>
+        {{- end -}}
         {{- if and .show_more $limit_exceeded }}
-            <li><a href="{{ .show_more_url | relURL }}">{{ .show_more_text | default "Show more..." }}</a></li>
+            <div class="show-more-wrapper">
+                <a href="{{ .show_more_url | relURL }}" class="show-more-link">{{ .show_more_text | default "Show more posts..." }}</a>
+            </div>
         {{ end }}
-    </ul>
-{{ end }}
+    </div>
+{{- end }}
