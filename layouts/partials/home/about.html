@@ -2,7 +2,7 @@
     <h2>About</h2>
     {{ $aboutPage := site.GetPage "/home/about" }}
     {{ with $aboutPage }}
-        <div class="about-content">
+        <div class="about-text">
             {{ .Content }}
         </div>
     {{ end }}

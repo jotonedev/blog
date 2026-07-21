@@ -1,5 +1,13 @@
 <section class="hero" id="home.hero">
-    <div class="hero-picture">
+    <div class="hero-avatar">
+        {{ $profile := resources.Get "profile.svg" }}
+        {{ if not $profile }}{{ $profile = resources.Get "profile.webp" }}{{ end }}
+        {{ if not $profile }}{{ $profile = resources.Get "images/profile.webp" }}{{ end }}
+        {{ if $profile }}
+            <img src="{{ $profile.RelPermalink }}" alt="Profile picture" class="profile-img" />
+        {{ else }}
+            <img src="{{ "profile.webp" | relURL }}" alt="Profile picture" class="profile-img" />
+        {{ end }}
     </div>
 
     <div class="hero-content">

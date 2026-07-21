@@ -3,11 +3,9 @@
     {{ $home := site.GetPage "/home" }}
     {{ with $home.Resources.GetMatch "skills.yaml" }}
         {{ $data := .Content | transform.Unmarshal }}
-        <div class="skills-list">
+        <div class="skills-badges">
             {{ range $data.skills }}
-                <div class="skill-item">
-                    <span>{{ . }}</span>
-                </div>
+                <span class="skill-badge">{{ . }}</span>
             {{ end }}
         </div>
     {{ end }}

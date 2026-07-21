@@ -2,3 +2,17 @@ projects:
   - title: "PyOWN"
     description: "A Python library for interacting with the OpenWebNet protocol for home automation."
     url: https://github.com/jotonedev/pyown
+    banner: /images/posts/pyown-dev/openwebnet_pyown.avif
+    tags:
+      - Python
+      - Home Automation
+
+  - title: "tgup"
+    description: "A tool to batch upload files to Telegram using the command line."
+    url: https://github.com/jotonedev/tgup
+    banner: /company/telegram.svg
+    tags:
+      - Python
+      - Telegram
+  
+  

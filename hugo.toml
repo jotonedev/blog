@@ -7,6 +7,38 @@ title = "Jotone's blog"
     extended = true
     min      = "0.41.0"
 
+  [[module.mounts]]
+    source = "content"
+    target = "content"
+
+  [[module.mounts]]
+    source = "assets"
+    target = "assets"
+
+  [[module.mounts]]
+    source = "assets/company"
+    target = "static/company"
+
+  [[module.mounts]]
+    source = "layouts"
+    target = "layouts"
+
+  [[module.mounts]]
+    source = "static"
+    target = "static"
+
+  [[module.mounts]]
+    source = "data"
+    target = "data"
+
+  [[module.mounts]]
+    source = "images"
+    target = "static/images"
+
+  [[module.mounts]]
+    source = "images"
+    target = "assets/images"
+
 [markup]
   [markup.goldmark]
     [markup.goldmark.parser]
@@ -40,4 +72,4 @@ title = "Jotone's blog"
     back_home_text    = ".."
     date_format       = "2006-01-02"
     isListGroupByDate = false
-    isShowFooter      = true
+    isShowFooter      = false

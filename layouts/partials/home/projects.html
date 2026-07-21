@@ -3,19 +3,38 @@
     {{ $home := site.GetPage "/home" }}
     {{ with $home.Resources.GetMatch "projects.yaml" }}
         {{ $data := .Content | transform.Unmarshal }}
-        {{ range $data.projects }}
-            <div class="project-item">
-                <h3>
-                    {{ if .url }}
-                        <a href="{{ .url }}" target="_blank" rel="noopener noreferrer">{{ .title }}</a>
-                    {{ else }}
-                        {{ .title }}
-                    {{ end }}
-                </h3>
-                {{ if .description }}
-                    <p>{{ .description }}</p>
-                {{ end }}
-            </div>
-        {{ end }}
+        <div class="projects-grid">
+            {{ range $data.projects }}
+                {{ $url := .url }}
+                <a href="{{ $url }}" target="_blank" rel="noopener noreferrer" class="project-card">
+                    <div class="project-banner">
+                        {{ if .banner }}
+                            {{ $bannerPath := strings.TrimPrefix "/" .banner }}
+                            {{ $bannerRes := resources.Get $bannerPath }}
+                            {{ if $bannerRes }}
+                                <img src="{{ $bannerRes.RelPermalink }}" width="900" height="640" alt="{{ .title }} banner" />
+                            {{ else }}
+                                <img src="{{ .banner | relURL }}" width="900" height="640" alt="{{ .title }} banner" />
+                            {{ end }}
+                        {{ else }}
+                            <div class="project-banner-placeholder">{{ .title }}</div>
+                        {{ end }}
+                    </div>
+                    <div class="project-body">
+                        <h3 class="project-title">{{ .title }}</h3>
+                        {{ if .description }}
+                            <p class="project-description">{{ .description }}</p>
+                        {{ end }}
+                        {{ if .tags }}
+                            <div class="project-tags">
+                                {{ range .tags }}
+                                    <span class="project-tag">{{ . }}</span>
+                                {{ end }}
+                            </div>
+                        {{ end }}
+                    </div>
+                </a>
+            {{ end }}
+        </div>
     {{ end }}
 </section>
