@@ -191,6 +191,46 @@
     text-align: right;
     white-space: nowrap;
   }
+
+  // On a narrow screen the nowrap date column leaves ~100px for the text, so
+  // every title and description collapses into an ellipsis stub. Below 600px
+  // drop the date onto its own line and let the text wrap: the row grows
+  // instead of truncating.
+  @media (max-width: 600px) {
+    display: grid;
+    grid-template-columns: 42px 1fr;
+    grid-template-areas:
+      'logo main'
+      'logo period';
+    column-gap: 0.85rem;
+    row-gap: 0.2rem;
+    align-items: start;
+    height: auto;
+    min-height: 4.5rem;
+
+    .row-logo {
+      grid-area: logo;
+      align-self: center;
+    }
+
+    .row-main {
+      grid-area: main;
+    }
+
+    .row-period {
+      grid-area: period;
+      margin-left: 0;
+      text-align: left;
+      white-space: normal;
+    }
+
+    .row-title,
+    .row-description {
+      white-space: normal;
+      overflow: visible;
+      text-overflow: clip;
+    }
+  }
 }
 
 // -------------- SKILLS -------------- //
@@ -234,6 +274,7 @@
 
   @media (max-width: 600px) {
     grid-template-columns: 1fr;
+    gap: 0.75rem;
   }
 }
 
@@ -315,5 +356,38 @@
     border-radius: var(--radius-xs);
     background: var(--surface-muted);
     color: var(--text-muted);
+  }
+
+  // Once the grid collapses to one column the 16:11 banner would be ~240px
+  // tall — a near-empty box above two lines of text. Below 600px the card
+  // becomes a horizontal row instead: thumbnail left, text right, same shape
+  // as .row-item in the sections above.
+  @media (max-width: 600px) {
+    flex-direction: row;
+    min-height: 88px;
+
+    .project-banner {
+      width: 88px;
+      min-width: 88px;
+      aspect-ratio: auto;
+      align-self: stretch;
+      border-right: 1px solid var(--border-subtle);
+
+      // A thumbnail this small must never crop.
+      img,
+      img.is-contained {
+        object-fit: contain;
+        padding: 0.6rem;
+      }
+    }
+
+    .project-body {
+      padding: 0.7rem 0.85rem;
+      justify-content: center;
+    }
+
+    .project-description {
+      @include clamp-lines(2);
+    }
   }
 }

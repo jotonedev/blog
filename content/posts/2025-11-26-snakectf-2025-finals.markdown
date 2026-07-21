@@ -17,7 +17,7 @@ It focused on hijacking a microservices cluster to bypass the authentication ser
 I was incredibly proud to have developed it using Go and [Fx](https://github.com/uber-go/fx).
 
 Additionally, I created another challenge for the Real World event and contributed to the creation of another 4.
-The one I created was named `llm-in-a-box` ([code](https://github.com/jotonedev/llm-in-a-box)); it consisted of an assistant box based on an open-weight LLM where, using only your voice, you had to prompt-inject it to get the flag.
+The one I created was named [llm-in-a-box](https://github.com/jotonedev/llm-in-a-box). It consisted of an assistant box based on an open-weight LLM where, using only your voice, you had to prompt-inject it to get the flag.
 Creating it allowed me to learn how products like the [Nest Mini](https://store.google.com/it/magazine/compare_speakers?hl=it) and similar devices work, and how they could be vulnerable to such attacks.
 
 Overall, SnakeCTF 2025 Finals was a fantastic experience. I am proud of the challenges I created and the opportunity to share my work and contribute to such a high-quality event. I’m already looking forward to future editions.
