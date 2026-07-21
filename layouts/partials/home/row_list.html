@@ -1,0 +1,57 @@
+{{- /*
+  Shared renderer for the work / education / certifications sections, which are
+  the same row layout over different YAML field names.
+
+  Params:
+    class, id, heading — section chrome
+    file, key          — resource in content/home/ and the top-level list key
+    titleKey           — field used for the row title (and its optional `url`)
+    descKey            — field used for the secondary line
+    logoKey            — field whose value is slugified to find the logo
+    logoFileKey        — optional field holding an explicit logo filename
+
+  The period column renders `date` when present, otherwise `start_date - end_date`.
+*/ -}}
+
+<section class="{{ .class }}" id="{{ .id }}">
+    <h2>{{ .heading }}</h2>
+    {{- $ctx := . }}
+    {{- $home := site.GetPage "/home" }}
+    {{- with $home.Resources.GetMatch $ctx.file }}
+        {{- $data := .Content | transform.Unmarshal }}
+        {{- with index $data $ctx.key }}
+        <div class="row-list">
+            {{- range . }}
+                {{- $item := . }}
+                {{- $title := index $item $ctx.titleKey }}
+                {{- $desc := index $item $ctx.descKey }}
+                {{- $logoName := index $item $ctx.logoKey }}
+                {{- $logoFile := "" }}
+                {{- with $ctx.logoFileKey }}{{ $logoFile = index $item . }}{{ end }}
+                <div class="row-item">
+                    {{ partial "logo.html" (dict "name" ($logoName | default $title) "file" $logoFile) }}
+                    <div class="row-main">
+                        <h3 class="row-title">
+                            {{- with $item.url -}}
+                                <a href="{{ . }}" target="_blank" rel="noopener noreferrer">{{ $title }}</a>
+                            {{- else -}}
+                                {{ $title }}
+                            {{- end -}}
+                        </h3>
+                        {{- with $desc }}
+                        <p class="row-description">{{ . }}</p>
+                        {{- end }}
+                    </div>
+                    {{- with $item.date }}
+                    <div class="row-period"><span>{{ . }}</span></div>
+                    {{- else }}
+                        {{- if or $item.start_date $item.end_date }}
+                    <div class="row-period"><span>{{ $item.start_date }} - {{ $item.end_date }}</span></div>
+                        {{- end }}
+                    {{- end }}
+                </div>
+            {{- end }}
+        </div>
+        {{- end }}
+    {{- end }}
+</section>

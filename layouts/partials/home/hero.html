@@ -1,19 +1,17 @@
 <section class="hero" id="home.hero">
     <div class="hero-avatar">
-        {{ $profile := resources.Get "profile.svg" }}
-        {{ if not $profile }}{{ $profile = resources.Get "profile.webp" }}{{ end }}
-        {{ if not $profile }}{{ $profile = resources.Get "images/profile.webp" }}{{ end }}
-        {{ if $profile }}
-            <img src="{{ $profile.RelPermalink }}" alt="Profile picture" class="profile-img" />
-        {{ else }}
-            <img src="{{ "profile.webp" | relURL }}" alt="Profile picture" class="profile-img" />
-        {{ end }}
+        {{- $profile := resources.Get "profile.webp" }}
+        {{- if not $profile }}{{ $profile = resources.Get "images/profile.webp" }}{{ end }}
+        {{- with $profile }}
+            {{- /* Displayed at 120px; ship 240px for 2x screens instead of the 720px original. */}}
+            {{- $avatar := cond (gt .Width 240) (.Resize "240x240 webp q85") . }}
+        <img src="{{ $avatar.RelPermalink }}" alt="John Toniutti" class="profile-img"
+             width="120" height="120" fetchpriority="high" decoding="async">
+        {{- end }}
     </div>
 
     <div class="hero-content">
         <h1>Hi, I'm John</h1>
-        <span class="hero-subtitle">
-            Ex Uber SWE intern. BSc Computer Science Student.
-        </span>
+        <p class="hero-subtitle">Ex Uber SWE intern. BSc Computer Science Student.</p>
     </div>
 </section>

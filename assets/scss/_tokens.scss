@@ -1,0 +1,104 @@
+// Every colour, radius and shadow used by the site is declared here.
+// Component files must never hardcode a hex value.
+
+:root {
+  color-scheme: light dark;
+
+  --font-sans: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+    'Helvetica Neue', Arial, sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, 'SF Mono', 'Fira Code', Menlo,
+    Consolas, 'Liberation Mono', monospace;
+
+  // Surfaces
+  --bg: #ffffff;
+  --surface: #ffffff;
+  --surface-subtle: #f9fafb;
+  --surface-muted: #f3f4f6;
+  --border: #e5e7eb;
+  --border-subtle: #f3f4f6;
+
+  // Text
+  --text: #111827;
+  --text-body: #374151;
+  --text-muted: #4b5563;
+  --text-subtle: #9ca3af;
+
+  // Accent
+  --accent: #4f46e5;
+  --accent-hover: #4338ca;
+  --accent-alt: #06b6d4;
+  --on-accent: #ffffff;
+  --accent-shadow: rgba(79, 70, 229, 0.3);
+  --gradient: linear-gradient(135deg, var(--accent) 0%, var(--accent-alt) 100%);
+
+  // Elevation
+  --shadow-sm: 0 4px 14px rgba(0, 0, 0, 0.04);
+  --shadow-md: 0 8px 24px rgba(79, 70, 229, 0.12);
+  --shadow-accent: 0 4px 12px var(--accent-shadow);
+
+  // Floating navigation bar
+  --nav-bg: rgba(255, 255, 255, 0.85);
+  --nav-border: rgba(0, 0, 0, 0.08);
+  --nav-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+  --nav-text: #374151;
+
+  // Code
+  --code-bg: #0f172a;
+  --code-text: #f8fafc;
+  --code-inline-bg: #f1f5f9;
+  --code-inline-text: #0f172a;
+
+  // Shape
+  --radius-xs: 4px;
+  --radius-sm: 8px;
+  --radius-md: 10px;
+  --radius-lg: 12px;
+  --radius-pill: 9999px;
+
+  // Motion.
+  --ease: cubic-bezier(0.4, 0, 0.2, 1);
+  --speed-fast: 0.2s;
+  --speed: 0.25s;
+  --transition-interactive:
+    background-color var(--speed) var(--ease), color var(--speed) var(--ease),
+    border-color var(--speed) var(--ease), box-shadow var(--speed) var(--ease),
+    transform var(--speed) var(--ease);
+  --transition-card:
+    border-color var(--speed) var(--ease), box-shadow var(--speed) var(--ease),
+    transform var(--speed) var(--ease);
+
+  --max-content-width: 640px;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #0b1120;
+    --surface: #111827;
+    --surface-subtle: #151e30;
+    --surface-muted: #1f2937;
+    --border: #263248;
+    --border-subtle: #1c2739;
+
+    --text: #f3f4f6;
+    --text-body: #d1d5db;
+    --text-muted: #9ca3af;
+    --text-subtle: #6b7280;
+
+    --accent: #818cf8;
+    --accent-hover: #a5b4fc;
+    --accent-alt: #22d3ee;
+    --on-accent: #0b1120;
+    --accent-shadow: rgba(129, 140, 248, 0.35);
+
+    --shadow-sm: 0 4px 14px rgba(0, 0, 0, 0.4);
+    --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.5);
+
+    --nav-bg: rgba(17, 24, 39, 0.8);
+    --nav-border: rgba(255, 255, 255, 0.1);
+    --nav-shadow: 0 4px 20px rgba(0, 0, 0, 0.45);
+    --nav-text: #d1d5db;
+
+    --code-inline-bg: #1f2937;
+    --code-inline-text: #e5e7eb;
+  }
+}

@@ -1,48 +1,30 @@
-{{- $posts := "" -}}
+{{- /* Renders a list of post cards. Accepts: pages, section, limit. */ -}}
 
-{{- if .section -}}
-    {{- $posts = (where site.RegularPages "Section" .section) -}}
+{{- $posts := site.RegularPages -}}
+{{- with .pages -}}
+    {{- $posts = . -}}
 {{- else -}}
-    {{- if (eq .context.Kind "taxonomy") -}}
-        {{- $posts = .context.Pages -}}
-    {{- else -}}
-        {{- if (eq .context.Kind "term") -}}
-            {{- $posts = .context.Data.Pages -}}
-        {{- else -}}
-            {{- $posts = site.RegularPages }}
-        {{- end -}}
+    {{- with $.section -}}
+        {{- $posts = where site.RegularPages "Section" . -}}
     {{- end -}}
 {{- end -}}
 
-{{- $limit_exceeded := "" -}}
-{{- if (and .limit (gt (len $posts) .limit)) -}}
-    {{- $limit_exceeded = true -}}
-{{- else -}}
-    {{- $limit_exceeded = false -}}
-{{ end }}
+{{- with .limit }}{{ $posts = first . $posts }}{{ end -}}
 
-{{- if (gt (len $posts) 0) }}
-    {{- if .limit }}
-        {{ $posts = (first .limit $posts ) }}
-    {{ end }}
-    <div class="post-cards-list">
-        {{- range $post := $posts -}}
-            <a href="{{ $post.RelPermalink }}" class="post-card-item">
-                <div class="post-card-main">
-                    <h3 class="post-card-title">{{ $post.Title }}</h3>
-                    {{ if $post.Summary }}
-                        <p class="post-card-summary">{{ $post.Summary | plainify | truncate 120 }}</p>
-                    {{ end }}
-                </div>
-                <div class="post-card-meta">
-                    <time datetime="{{ $post.Date }}">{{ $post.Date | time.Format "Jan 02, 2006" }}</time>
-                </div>
-            </a>
-        {{- end -}}
-        {{- if and .show_more $limit_exceeded }}
-            <div class="show-more-wrapper">
-                <a href="{{ .show_more_url | relURL }}" class="show-more-link">{{ .show_more_text | default "Show more posts..." }}</a>
-            </div>
-        {{ end }}
-    </div>
+{{- if $posts }}
+<div class="post-cards-list">
+    {{- range $posts }}
+    <a href="{{ .RelPermalink }}" class="post-card-item">
+        <div class="post-card-main">
+            <h3 class="post-card-title">{{ .Title }}</h3>
+            {{- with .Summary }}
+            <p class="post-card-summary">{{ . | plainify | chomp | truncate 120 }}</p>
+            {{- end }}
+        </div>
+        <div class="post-card-meta">
+            <time datetime="{{ .Date.Format "2006-01-02T15:04:05Z07:00" }}">{{ .Date | time.Format "Jan 02, 2006" }}</time>
+        </div>
+    </a>
+    {{- end }}
+</div>
 {{- end }}

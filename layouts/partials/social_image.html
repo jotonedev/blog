@@ -1,0 +1,36 @@
+{{- /*
+  Resolves the social-share image for a page and returns a dict:
+    { url, width, height, alt }
+
+  A page's `image` front matter is fitted into a 1200x630 canvas and padded
+  rather than cropped, so logo-style banners keep their margins. Pages without
+  one fall back to the site card in assets/ (params.socialCard).
+*/ -}}
+
+{{- $card := resources.Get (site.Params.socialCard | default "social-card.jpg") -}}
+{{- $result := dict "url" "" "width" 1200 "height" 630 "alt" site.Title -}}
+{{- with $card -}}
+  {{- $result = dict "url" .Permalink "width" .Width "height" .Height "alt" site.Title -}}
+{{- end -}}
+
+{{- with .Params.image -}}
+  {{- $src := strings.TrimPrefix "/" . -}}
+  {{- with resources.Get $src -}}
+    {{- if eq .ResourceType "image" -}}
+      {{- $fit := .Fit "1200x630 jpg q85" -}}
+      {{- $left := int (math.Floor (div (sub 1200 $fit.Width) 2)) -}}
+      {{- $top := int (math.Floor (div (sub 630 $fit.Height) 2)) -}}
+      {{- $right := sub (sub 1200 $fit.Width) $left -}}
+      {{- $bottom := sub (sub 630 $fit.Height) $top -}}
+      {{- $card := $fit -}}
+      {{- if or (gt (add $left $right) 0) (gt (add $top $bottom) 0) -}}
+        {{- $card = $fit.Filter (images.Padding $top $right $bottom $left "#ffffff") -}}
+      {{- end -}}
+      {{- $result = dict "url" $card.Permalink "width" $card.Width "height" $card.Height "alt" $.Title -}}
+    {{- else -}}
+      {{- $result = dict "url" .Permalink "width" 0 "height" 0 "alt" $.Title -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+
+{{- return $result -}}

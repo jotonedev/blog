@@ -1,18 +1,12 @@
 {{ define "main" }}
 <div class="error-404-container">
+    {{- with resources.Get "404-pixel-art.svg" }}
     <div class="pixel-art-wrapper">
-        {{ $pixelArt := resources.Get "404-pixel-art.svg" }}
-        {{ if $pixelArt }}
-            <img src="{{ $pixelArt.RelPermalink }}" alt="Funny 404 Pixel Art" class="pixel-art-img" />
-        {{ end }}
+        {{- $art := . | minify | fingerprint }}
+        <img src="{{ $art.RelPermalink }}" alt="" class="pixel-art-img" width="280" height="246" decoding="async">
     </div>
+    {{- end }}
 
-    <h1 class="error-title">404: Not Found</h1>
-
-    <div class="error-actions">
-        <a href="{{ "/" | relURL }}" class="home-btn">
-            Take Me Home
-        </a>
-    </div>
+    <h1 class="error-title">404 Not Found</h1>
 </div>
 {{ end }}

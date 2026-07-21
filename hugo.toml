@@ -1,11 +1,19 @@
-baseURL = "https://jotone.it/"
-languageCode = "en-us"
-title = "Jotone's blog"
+baseURL                = "https://jotone.it/"
+languageCode           = "en-us"
+defaultContentLanguage = "en"
+title                  = "Jotone's blog"
+copyright              = "John Toniutti"
+enableRobotsTXT        = true
+
+[taxonomies]
+
+[minify]
+  minifyOutput = true
 
 [module]
   [module.hugoVersion]
     extended = true
-    min      = "0.41.0"
+    min = "0.128.0"
 
   [[module.mounts]]
     source = "content"
@@ -28,16 +36,25 @@ title = "Jotone's blog"
     target = "static"
 
   [[module.mounts]]
-    source = "data"
-    target = "data"
-
-  [[module.mounts]]
     source = "images"
     target = "static/images"
 
   [[module.mounts]]
     source = "images"
     target = "assets/images"
+
+[outputs]
+  home = ["HTML", "RSS"]
+
+[sitemap]
+  changefreq = "monthly"
+  filename   = "sitemap.xml"
+  priority   = 0.5
+
+[imaging]
+  quality        = 85
+  resampleFilter = "Lanczos"
+  bgColor = "#ffffff"
 
 [markup]
   [markup.goldmark]
@@ -56,10 +73,10 @@ title = "Jotone's blog"
     lineNoStart        = 1
     lineNos            = false
     lineNumbersInTable = true
-    noClasses          = true
-    noHl               = false
-    style              = 'rrt'
-    tabWidth           = 4
+    noClasses = true
+    noHl      = false
+    style     = 'rrt'
+    tabWidth  = 4
 
   [markup.tableOfContents]
     startLevel = 2
@@ -67,9 +84,14 @@ title = "Jotone's blog"
     ordered    = false
 
 [params]
+  author = "John Toniutti"
+  description = "Personal blog of John Toniutti"
+  keywords    = ["John Toniutti", "jotone", "jotonedev"]
+  email       = "contact@jotone.it"
+  socialCard = "social-card.jpg"
+  themeColor = "#4f46e5"
+
   [params.theme_config]
-    appearance        = "auto"
-    back_home_text    = ".."
     date_format       = "2006-01-02"
     isListGroupByDate = false
     isShowFooter      = false

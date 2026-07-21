@@ -1,0 +1,39 @@
+{{- /*
+  Image render hook.
+
+  Local images are resolved through Hugo's asset pipeline so every <img> gets
+  intrinsic width/height (no layout shift), lazy loading, and a srcset capped at
+  1280px — the content column is 640px, so that covers 2x screens without
+  shipping the 2532px originals. Remote images pass through untouched.
+
+  A markdown title (`![alt](src "title")`) becomes a <figcaption>.
+*/ -}}
+
+{{- $src := .Destination -}}
+{{- $alt := .PlainText | default .Text -}}
+{{- $isRemote := or (hasPrefix $src "http://") (hasPrefix $src "https://") (hasPrefix $src "//") -}}
+
+{{- $img := false -}}
+{{- if not $isRemote -}}
+    {{- $img = .Page.Resources.GetMatch $src -}}
+    {{- if not $img }}{{ $img = resources.Get (strings.TrimPrefix "/" $src) }}{{ end -}}
+    {{- if and $img (ne $img.ResourceType "image") }}{{ $img = false }}{{ end -}}
+{{- end -}}
+
+{{- with .Title }}<figure>{{ end -}}
+{{- with $img -}}
+    {{- $main := . -}}
+    {{- if gt .Width 1280 }}{{ $main = .Resize "1280x webp q85" }}{{ end -}}
+    {{- $srcset := slice -}}
+    {{- if gt $main.Width 640 -}}
+        {{- $half := $main.Resize "640x webp q85" -}}
+        {{- $srcset = slice (printf "%s 640w" $half.RelPermalink) (printf "%s %dw" $main.RelPermalink $main.Width) -}}
+    {{- end -}}
+    <img src="{{ $main.RelPermalink }}"
+        {{- with $srcset }} srcset="{{ delimit . ", " }}" sizes="(max-width: 688px) 100vw, 640px"{{ end }}
+         width="{{ $main.Width }}" height="{{ $main.Height }}"
+         alt="{{ $alt }}" loading="lazy" decoding="async">
+{{- else -}}
+    <img src="{{ $src }}" alt="{{ $alt }}" loading="lazy" decoding="async" referrerpolicy="no-referrer">
+{{- end -}}
+{{- with .Title }}<figcaption>{{ . }}</figcaption></figure>{{ end -}}

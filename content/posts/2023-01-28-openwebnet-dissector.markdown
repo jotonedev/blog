@@ -3,7 +3,7 @@ aliases:
   - /2023/01/28/openwebnet-dissector
 title:  "An OpenWebNet dissector for Wireshark"
 date:   2023-01-28T16:11:44+0100
-image: /images/posts/openwebnet-dissector/openwebnet_dissector.avif
+image: /images/posts/openwebnet-dissector/openwebnet_dissector.webp
 ---
 
 I recently noted there is no dissector yet for the protocol OpenWebNet. So, I developed one.

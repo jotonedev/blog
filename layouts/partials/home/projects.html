@@ -1,40 +1,51 @@
 <section class="projects" id="home.projects">
     <h2>Projects</h2>
-    {{ $home := site.GetPage "/home" }}
-    {{ with $home.Resources.GetMatch "projects.yaml" }}
-        {{ $data := .Content | transform.Unmarshal }}
+    {{- $home := site.GetPage "/home" }}
+    {{- with $home.Resources.GetMatch "projects.yaml" }}
+        {{- $data := .Content | transform.Unmarshal }}
         <div class="projects-grid">
-            {{ range $data.projects }}
-                {{ $url := .url }}
-                <a href="{{ $url }}" target="_blank" rel="noopener noreferrer" class="project-card">
+            {{- range $data.projects }}
+                {{- $item := . }}
+                <a href="{{ .url }}" target="_blank" rel="noopener noreferrer" class="project-card">
                     <div class="project-banner">
-                        {{ if .banner }}
-                            {{ $bannerPath := strings.TrimPrefix "/" .banner }}
-                            {{ $bannerRes := resources.Get $bannerPath }}
-                            {{ if $bannerRes }}
-                                <img src="{{ $bannerRes.RelPermalink }}" width="900" height="640" alt="{{ .title }} banner" />
-                            {{ else }}
-                                <img src="{{ .banner | relURL }}" width="900" height="640" alt="{{ .title }} banner" />
-                            {{ end }}
-                        {{ else }}
-                            <div class="project-banner-placeholder">{{ .title }}</div>
-                        {{ end }}
+                        {{- with $item.banner }}
+                            {{- $res := resources.Get (strings.TrimPrefix "/" .) }}
+                            {{- if $res }}
+                                {{- $isSvg := eq $res.MediaType.SubType "svg" }}
+                                {{- $w := 900 }}{{ $h := 640 }}
+                                {{- if $isSvg }}
+                                    {{- $res = $res | minify | fingerprint }}
+                                {{- else if eq $res.ResourceType "image" }}
+                                    {{- /* Cards are ~300px wide; 640px covers 2x screens. */}}
+                                    {{- if gt $res.Width 640 }}{{ $res = $res.Resize "640x webp q85" }}{{ end }}
+                                    {{- $w = $res.Width }}{{ $h = $res.Height }}
+                                {{- end }}
+                        <img src="{{ $res.RelPermalink }}" width="{{ $w }}" height="{{ $h }}"
+                             alt="{{ $item.title }}" loading="lazy" decoding="async"
+                             {{ if $isSvg }}class="is-contained"{{ end }}>
+                            {{- else }}
+                        <img src="{{ . | relURL }}" width="900" height="640"
+                             alt="{{ $item.title }}" loading="lazy" decoding="async">
+                            {{- end }}
+                        {{- else }}
+                        <div class="project-banner-placeholder">{{ $item.title }}</div>
+                        {{- end }}
                     </div>
                     <div class="project-body">
                         <h3 class="project-title">{{ .title }}</h3>
-                        {{ if .description }}
-                            <p class="project-description">{{ .description }}</p>
-                        {{ end }}
-                        {{ if .tags }}
-                            <div class="project-tags">
-                                {{ range .tags }}
-                                    <span class="project-tag">{{ . }}</span>
-                                {{ end }}
-                            </div>
-                        {{ end }}
+                        {{- with .description }}
+                        <p class="project-description">{{ . }}</p>
+                        {{- end }}
+                        {{- with .tags }}
+                        <div class="project-tags">
+                            {{- range . }}
+                            <span class="project-tag">{{ . }}</span>
+                            {{- end }}
+                        </div>
+                        {{- end }}
                     </div>
                 </a>
-            {{ end }}
+            {{- end }}
         </div>
-    {{ end }}
+    {{- end }}
 </section>

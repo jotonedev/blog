@@ -1,21 +1,25 @@
 {{ define "main" }}
-{{ partial "back_link.html" .}}
+<article class="single-post">
+    <header class="post-header">
+        <h1 class="single-post-title">{{ .Title }}</h1>
+        {{- if not .Date.IsZero }}
+        <div class="single-post-meta">
+            <time datetime="{{ .Date.Format "2006-01-02T15:04:05Z07:00" }}">{{ .Date | time.Format site.Params.theme_config.date_format }}</time>
+        </div>
+        {{- end }}
+    </header>
 
-<article>
-    <p class="post-meta">
-        <time datetime="{{ .Date }}">
-            {{ .Date | time.Format site.Params.theme_config.date_format }}
-        </time>
-    </p>
-
-    <h1>{{ .Title }}</h1>
-
-    {{ if .Params.toc }}
-        <aside {{ if .Params.tocBorder }} class="toc" {{ end }}>
+    {{- if .Params.toc }}
+    <aside class="post-toc">
+        <details open>
+            <summary class="toc-heading">Table of Contents</summary>
             {{ .TableOfContents }}
-        </aside>
-    {{ end }}
+        </details>
+    </aside>
+    {{- end }}
 
-    {{ .Content }}
+    <div class="post-content">
+        {{ .Content }}
+    </div>
 </article>
 {{ end }}

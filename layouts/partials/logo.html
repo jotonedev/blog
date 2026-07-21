@@ -1,0 +1,33 @@
+{{- /*
+  Renders the logo cell used by the work / education / certifications rows.
+
+  Params:
+    name — display name, used to derive the asset slug and the fallback badge
+    file — optional explicit filename inside assets/company/
+
+  Looks for assets/company/<file>, then <slug>.svg / .png / .webp, and falls
+  back to a gradient badge with the first letter. SVGs are minified.
+  alt is empty on purpose: the row always shows the name as adjacent text, so
+  captioning the logo too would just make screen readers say it twice.
+*/ -}}
+
+{{- $name := .name -}}
+{{- $slug := $name | urlize -}}
+{{- $logo := false -}}
+{{- with .file }}{{ $logo = resources.Get (printf "company/%s" .) }}{{ end -}}
+{{- if not $logo }}{{ $logo = resources.Get (printf "company/%s.svg" $slug) }}{{ end -}}
+{{- if not $logo }}{{ $logo = resources.Get (printf "company/%s.png" $slug) }}{{ end -}}
+{{- if not $logo }}{{ $logo = resources.Get (printf "company/%s.webp" $slug) }}{{ end -}}
+<div class="row-logo">
+{{- with $logo -}}
+    {{- $asset := . -}}
+    {{- if eq .MediaType.SubType "svg" -}}
+        {{- $asset = . | minify | fingerprint -}}
+    {{- else if eq .ResourceType "image" -}}
+        {{- if gt .Width 84 }}{{ $asset = .Resize "84x webp q85" }}{{ end -}}
+    {{- end -}}
+    <img src="{{ $asset.RelPermalink }}" alt="" width="42" height="42" loading="lazy" decoding="async">
+{{- else -}}
+    <div class="logo-badge" aria-hidden="true">{{ substr $name 0 1 }}</div>
+{{- end -}}
+</div>

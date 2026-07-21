@@ -3,7 +3,7 @@ aliases:
   - /2025/11/26/snakectf-2025-finals
 title:  "SnakeCTF 2025 Finals - my experience"
 date:   2025-11-26T12:19:00+0100
-image: /images/posts/snakectf-2025-finals/snakectf_2025_finals_01.avif
+image: /images/posts/snakectf-2025-finals/snakectf_2025_finals_01.webp
 ---
 
 Hi everyone!
@@ -25,4 +25,4 @@ Overall, SnakeCTF 2025 Finals was a fantastic experience. I am proud of the chal
 If you want to learn more about the event, please check out our [website](https://snakectf.org/).
 You can find the scoreboard for the event on [CTFtime](https://ctftime.org/event/2994).
 
-![Group photo with all the participants](/images/posts/snakectf-2025-finals/snakectf_2025_finals_02.avif)
+![Group photo with all the participants](/images/posts/snakectf-2025-finals/snakectf_2025_finals_02.webp)

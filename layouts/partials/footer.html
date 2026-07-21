@@ -1,1 +1,5 @@
-{{/* Footer disabled */}}
+{{- if site.Params.theme_config.isShowFooter -}}
+<footer class="site-footer">
+    <p>&copy; {{ now.Year }} {{ site.Params.author | default site.Title }}</p>
+</footer>
+{{- end -}}

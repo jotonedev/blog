@@ -1,0 +1,43 @@
+// -------------- SHARED PATTERNS -------------- //
+// The same "raise it and glow" hover treatment is used by nav buttons, contact icons, cards and the 404 button
+
+@mixin card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+}
+
+@mixin lift($x: 0, $y: -2px) {
+  transform: translate($x, $y);
+  box-shadow: var(--shadow-md);
+}
+
+@mixin accent-fill {
+  background: var(--gradient);
+  color: var(--on-accent);
+  border-color: transparent;
+  box-shadow: var(--shadow-accent);
+}
+
+// Keyboard-only focus ring. Applied globally in _base.scss; available here for
+// components that need to offset it differently.
+@mixin focus-ring($offset: 2px) {
+  outline: 2px solid var(--accent);
+  outline-offset: $offset;
+  border-radius: var(--radius-xs);
+}
+
+@mixin clamp-lines($lines) {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: $lines;
+  line-clamp: $lines;
+  overflow: hidden;
+}
+
+@mixin truncate {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

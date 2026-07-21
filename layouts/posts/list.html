@@ -1,19 +1,17 @@
 {{ define "main" }}
-
 <div class="posts-page-header">
     <h1>{{ .Title }}</h1>
-    {{ if .Content }}
-        <div class="posts-page-description">{{ .Content }}</div>
-    {{ end }}
+    {{- with .Content }}
+    <div class="posts-page-description">{{ . }}</div>
+    {{- end }}
 </div>
 
-{{ if .Site.Params.theme_config.isListGroupByDate }}
-    {{ range .Pages.GroupByDate "2006" }}
-        <h2 class="year-group-title">{{ .Key }}</h2>
-        {{ partial "post_list.html" (dict "context" . "pages" .Pages) }}
-    {{ end }}
+{{ if site.Params.theme_config.isListGroupByDate }}
+    {{- range .Pages.GroupByDate "2006" }}
+    <h2 class="year-group-title">{{ .Key }}</h2>
+    {{ partial "post_list.html" (dict "pages" .Pages) }}
+    {{- end }}
 {{ else }}
-    {{ partial "post_list.html" (dict "context" . "section" .Section) }}
+    {{- partial "post_list.html" (dict "pages" .Pages) }}
 {{ end }}
-
 {{ end }}

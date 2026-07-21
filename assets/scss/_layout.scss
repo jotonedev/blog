@@ -1,0 +1,83 @@
+// -------------- PAGE SHELL -------------- //
+.page-content {
+  position: relative;
+  z-index: 1;
+}
+
+.w {
+  max-width: var(--max-content-width);
+  margin: 0 auto;
+  padding: 2rem 1.5rem 4rem;
+}
+
+// Jump straight to the article, visible only once focused.
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  padding: 0.6rem 1rem;
+  background: var(--surface);
+  color: var(--accent);
+  border-radius: var(--radius-sm);
+  z-index: 1100;
+
+  &:focus {
+    left: 1rem;
+    top: 1rem;
+  }
+}
+
+// -------------- STICKY NAVIGATION -------------- //
+.top-nav {
+  position: sticky;
+  top: 1rem;
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 2.5rem;
+}
+
+.nav-container {
+  display: inline-flex;
+  gap: 0.5rem;
+  padding: 0.4rem;
+  border-radius: var(--radius-pill);
+  background: var(--nav-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--nav-border);
+  box-shadow: var(--nav-shadow);
+}
+
+.nav-button {
+  padding: 0.5rem 1.25rem;
+  border-radius: var(--radius-pill);
+  font-weight: 600;
+  font-size: 0.95rem;
+  text-decoration: none;
+  color: var(--nav-text);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: var(--transition-interactive);
+
+  &:hover {
+    @include accent-fill;
+    transform: translateY(-1px);
+    text-decoration: none;
+  }
+
+  &.active {
+    @include accent-fill;
+  }
+}
+
+// -------------- FOOTER -------------- //
+.site-footer {
+  margin-top: 4rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--border);
+  font-size: 0.85rem;
+  color: var(--text-subtle);
+  text-align: center;
+}
