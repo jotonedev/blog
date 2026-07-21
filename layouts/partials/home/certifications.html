@@ -1,0 +1,24 @@
+<section class="certifications" id="home.certifications">
+    <h2>Certifications</h2>
+    {{ $home := site.GetPage "/home" }}
+    {{ with $home.Resources.GetMatch "certifications.yaml" }}
+        {{ $data := .Content | transform.Unmarshal }}
+        {{ range $data.certifications }}
+            <div class="certification-item">
+                <h3>
+                    {{ if .url }}
+                        <a href="{{ .url }}" target="_blank" rel="noopener noreferrer">{{ .title }}</a>
+                    {{ else }}
+                        {{ .title }}
+                    {{ end }}
+                </h3>
+                {{ if .company }}
+                    <p>{{ .company }}</p>
+                {{ end }}
+                {{ if .date }}
+                    <span class="dates">{{ .date }}</span>
+                {{ end }}
+            </div>
+        {{ end }}
+    {{ end }}
+</section>

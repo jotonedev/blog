@@ -1,0 +1,14 @@
+<section class="skills" id="home.skills">
+    <h2>Skills</h2>
+    {{ $home := site.GetPage "/home" }}
+    {{ with $home.Resources.GetMatch "skills.yaml" }}
+        {{ $data := .Content | transform.Unmarshal }}
+        <div class="skills-list">
+            {{ range $data.skills }}
+                <div class="skill-item">
+                    <span>{{ . }}</span>
+                </div>
+            {{ end }}
+        </div>
+    {{ end }}
+</section>

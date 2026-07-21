@@ -1,0 +1,24 @@
+<section class="education" id="home.education">
+    <h2>Education</h2>
+    {{ $home := site.GetPage "/home" }}
+    {{ with $home.Resources.GetMatch "education.yaml" }}
+        {{ $data := .Content | transform.Unmarshal }}
+        {{ range $data.education }}
+            <div class="education-item">
+                <h3>
+                    {{ if .url }}
+                        <a href="{{ .url }}" target="_blank" rel="noopener noreferrer">{{ .title }}</a>
+                    {{ else }}
+                        {{ .title }}
+                    {{ end }}
+                </h3>
+                {{ if .degree }}
+                    <p>{{ .degree }}</p>
+                {{ end }}
+                {{ if or .start_date .end_date }}
+                    <span class="dates">{{ .start_date }} - {{ .end_date }}</span>
+                {{ end }}
+            </div>
+        {{ end }}
+    {{ end }}
+</section>

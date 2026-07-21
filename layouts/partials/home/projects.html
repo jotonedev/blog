@@ -1,0 +1,21 @@
+<section class="projects" id="home.projects">
+    <h2>Projects</h2>
+    {{ $home := site.GetPage "/home" }}
+    {{ with $home.Resources.GetMatch "projects.yaml" }}
+        {{ $data := .Content | transform.Unmarshal }}
+        {{ range $data.projects }}
+            <div class="project-item">
+                <h3>
+                    {{ if .url }}
+                        <a href="{{ .url }}" target="_blank" rel="noopener noreferrer">{{ .title }}</a>
+                    {{ else }}
+                        {{ .title }}
+                    {{ end }}
+                </h3>
+                {{ if .description }}
+                    <p>{{ .description }}</p>
+                {{ end }}
+            </div>
+        {{ end }}
+    {{ end }}
+</section>

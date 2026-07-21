@@ -1,0 +1,9 @@
+<section class="about" id="home.about">
+    <h2>About</h2>
+    {{ $aboutPage := site.GetPage "/home/about" }}
+    {{ with $aboutPage }}
+        <div class="about-content">
+            {{ .Content }}
+        </div>
+    {{ end }}
+</section>

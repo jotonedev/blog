@@ -1,0 +1,4 @@
+projects:
+  - title: "PyOWN"
+    description: "A Python library for interacting with the OpenWebNet protocol for home automation."
+    url: https://github.com/jotonedev/pyown

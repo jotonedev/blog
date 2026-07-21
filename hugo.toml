@@ -1,3 +1,7 @@
+baseURL = "https://jotone.it/"
+languageCode = "en-us"
+title = "Jotone's blog"
+
 [module]
   [module.hugoVersion]
     extended = true
