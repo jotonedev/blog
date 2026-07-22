@@ -1,0 +1,22 @@
+# One entry per photograph in photos/. Order does not matter here — the page
+# sorts by capture date, newest first.
+#
+#   file:     required, filename inside photos/
+#   alt:      required, description for screen readers and for when the image
+#             fails to load. Not displayed on the page.
+#   location: shown in the caption
+#   date:     optional, overrides the capture date read from EXIF
+#   device:   optional, overrides the camera read from EXIF. Use it for film,
+#             scans, or when the EXIF make/model reads badly.
+
+- file: 2025_04_05-castions.jpg
+  alt: Aerial view of a lake
+  location: Castions di Strada, Italy
+
+- file: 2026_04_03-tagliamento.jpg
+  alt: Aerial view of a river
+  location: Tagliamento, Italy
+
+- file: 2026_07_10-bibione.jpg
+  alt: Aerial view of the Tagliamento river meeting the sea.
+  location: Bibione, Italy

@@ -10,6 +10,25 @@
   padding: 2rem 1.5rem 4rem;
 }
 
+// Pages that need room for imagery opt in with `wide: true` in front matter.
+.w-wide {
+  --max-content-width: 880px;
+}
+
+// Title block shared by every index page (posts, photos, taxonomy lists).
+.page-heading {
+  h1 {
+    font-size: 2rem;
+    font-weight: 800;
+    margin: 0 0 0.35rem;
+  }
+
+  .page-heading-description {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+  }
+}
+
 // Jump straight to the article, visible only once focused.
 .skip-link {
   position: absolute;
@@ -80,4 +99,15 @@
   font-size: 0.85rem;
   color: var(--text-subtle);
   text-align: center;
+
+  p {
+    margin: 0;
+  }
+
+  .footer-note {
+    margin-top: 0.4rem;
+    max-width: 46ch;
+    margin-inline: auto;
+    line-height: 1.5;
+  }
 }

@@ -1,0 +1,64 @@
+// -------------- PHOTO FEED -------------- //
+.photo-feed {
+  display: flex;
+  flex-direction: column;
+  gap: 3.5rem;
+  margin-top: 2rem;
+}
+
+.photo-item {
+  margin: 0;
+}
+
+.photo-frame {
+  display: block;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  // The photograph itself is the only thing that should carry colour here, so
+  // the frame stays flat until it is hovered or focused.
+  background: var(--surface-muted);
+  transition: var(--transition-card);
+
+  img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+}
+
+a.photo-frame {
+  &:hover {
+    @include lift;
+  }
+
+  &:focus-visible {
+    @include focus-ring(3px);
+    border-radius: var(--radius-lg);
+  }
+}
+
+.photo-meta {
+  margin-top: 0.75rem;
+  font-size: 0.85rem;
+  color: var(--text-subtle);
+  line-height: 1.5;
+}
+
+.photo-sep {
+  margin: 0 0.45rem;
+}
+
+.photo-empty {
+  margin-top: 2rem;
+  color: var(--text-muted);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .photo-frame {
+    transition: none;
+  }
+
+  a.photo-frame:hover {
+    transform: none;
+  }
+}

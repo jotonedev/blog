@@ -94,4 +94,4 @@ enableRobotsTXT        = true
   [params.theme_config]
     date_format       = "2006-01-02"
     isListGroupByDate = false
-    isShowFooter      = false
+    isShowFooter      = true
