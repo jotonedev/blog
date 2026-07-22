@@ -29,7 +29,7 @@
       {{- $date := "" -}}
       {{- with .date }}{{ $date = time.AsTime . }}{{ end -}}
       {{- if not $date -}}
-        {{- with $img.Meta }}{{ if not .Date.IsZero }}{{ $date = .Date }}{{ end }}{{ end -}}
+        {{- with $img.Exif }}{{ if not .Date.IsZero }}{{ $date = .Date }}{{ end }}{{ end -}}
       {{- end -}}
       {{- if not $date -}}
         {{- warnf "photo_list: %q has no `date` in content/photos/photos.yaml and none in its EXIF, so it sorts last" .file -}}
@@ -41,9 +41,9 @@
       {{- if not $device -}}
         {{- $make := "" -}}
         {{- $model := "" -}}
-        {{- with $img.Meta -}}
-          {{- with .Exif.Make }}{{ $make = title (lower (trim (string .) " ")) }}{{ end -}}
-          {{- with .Exif.Model }}{{ $model = trim (string .) " " }}{{ end -}}
+        {{- with $img.Exif -}}
+          {{- with .Tags.Make }}{{ $make = title (lower (trim (string .) " ")) }}{{ end -}}
+          {{- with .Tags.Model }}{{ $model = trim (string .) " " }}{{ end -}}
         {{- end -}}
         {{- if and $make $model -}}
           {{- $device = cond (hasPrefix (lower $model) (lower $make)) $model (printf "%s %s" $make $model) -}}
