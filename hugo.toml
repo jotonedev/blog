@@ -43,10 +43,6 @@ enableRobotsTXT        = true
     source = "images"
     target = "assets/images"
 
-  [[module.mounts]]
-    source = "photos"
-    target = "assets/photos"
-
 [outputs]
   home = ["HTML", "RSS"]
 

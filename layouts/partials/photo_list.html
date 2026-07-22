@@ -1,10 +1,5 @@
 {{- /*
   Renders the photo feed, newest first.
-
-  Images come from photos/ (mounted at assets/photos), metadata from
-  data/photos.yaml. Capture date and camera fall back to the file's own EXIF
-  whenever the YAML entry leaves them out, so the usual case is one short entry
-  per photo carrying only alt text and a location.
 */ -}}
 
 {{- /* Widths generated for the feed. The container is 880px, so 1760 covers a
@@ -13,13 +8,18 @@
 {{- $sizes := "(max-width: 928px) calc(100vw - 3rem), 880px" -}}
 
 {{- $items := slice -}}
-{{- range hugo.Data.photos -}}
+{{- $photosPage := site.GetPage "/photos" -}}
+{{- $photosData := slice -}}
+{{- with $photosPage.Resources.GetMatch "photos.yaml" -}}
+  {{- $photosData = . | transform.Unmarshal -}}
+{{- end -}}
+{{- range $photosData -}}
   {{- if not .file -}}
-    {{- warnf "photo_list: entry in data/photos.yaml has no `file` key, skipping" -}}
+    {{- warnf "photo_list: entry in content/photos/photos.yaml has no `file` key, skipping" -}}
   {{- else -}}
-    {{- $img := resources.Get (printf "photos/%s" .file) -}}
+    {{- $img := resources.Get (printf "images/photos/%s" .file) -}}
     {{- if not $img -}}
-      {{- warnf "photo_list: %q is listed in data/photos.yaml but missing from photos/" .file -}}
+      {{- warnf "photo_list: %q is listed in content/photos/photos.yaml but missing from photos/" .file -}}
     {{- else if ne $img.ResourceType "image" -}}
       {{- warnf "photo_list: %q is not an image" .file -}}
     {{- else -}}
@@ -32,7 +32,7 @@
         {{- with $img.Meta }}{{ if not .Date.IsZero }}{{ $date = .Date }}{{ end }}{{ end -}}
       {{- end -}}
       {{- if not $date -}}
-        {{- warnf "photo_list: %q has no `date` in data/photos.yaml and none in its EXIF, so it sorts last" .file -}}
+        {{- warnf "photo_list: %q has no `date` in content/photos/photos.yaml and none in its EXIF, so it sorts last" .file -}}
       {{- end -}}
 
       {{- /* Camera: YAML wins, else EXIF make + model. Models often already carry
@@ -53,7 +53,7 @@
       {{- end -}}
 
       {{- if not .alt -}}
-        {{- warnf "photo_list: %q has no alt text in data/photos.yaml" .file -}}
+        {{- warnf "photo_list: %q has no alt text in content/photos/photos.yaml" .file -}}
       {{- end -}}
 
       {{- /* Sorting on a formatted timestamp keeps undated photos (empty key)
