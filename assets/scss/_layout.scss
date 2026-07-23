@@ -29,22 +29,6 @@
   }
 }
 
-// Jump straight to the article, visible only once focused.
-.skip-link {
-  position: absolute;
-  left: -9999px;
-  top: 0;
-  padding: 0.6rem 1rem;
-  background: var(--surface);
-  color: var(--accent);
-  border-radius: var(--radius-sm);
-  z-index: 1100;
-
-  &:focus {
-    left: 1rem;
-    top: 1rem;
-  }
-}
 
 // -------------- STICKY NAVIGATION -------------- //
 .top-nav {

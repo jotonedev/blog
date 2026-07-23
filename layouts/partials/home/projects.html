@@ -21,14 +21,14 @@
                                     {{- $w = $res.Width }}{{ $h = $res.Height }}
                                 {{- end }}
                         <img src="{{ $res.RelPermalink }}" width="{{ $w }}" height="{{ $h }}"
-                             alt="{{ $item.title }}" loading="lazy" decoding="async"
+                             alt="" loading="lazy" decoding="async"
                              {{ if $isSvg }}class="is-contained"{{ end }}>
                             {{- else }}
                         <img src="{{ . | relURL }}" width="900" height="640"
-                             alt="{{ $item.title }}" loading="lazy" decoding="async">
+                             alt="" loading="lazy" decoding="async">
                             {{- end }}
                         {{- else }}
-                        <div class="project-banner-placeholder">{{ $item.title }}</div>
+                        <div class="project-banner-placeholder" aria-hidden="true">{{ $item.title }}</div>
                         {{- end }}
                     </div>
                     <div class="project-body">

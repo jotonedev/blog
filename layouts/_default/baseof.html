@@ -2,13 +2,16 @@
 <html lang="{{ site.LanguageCode }}">
 {{- partial "head.html" . -}}
 <body>
-    <a class="skip-link" href="#main">Skip to content</a>
-    <main id="main" class="page-content">
+    <div class="page-content">
         <div class="w{{ if .Params.wide }} w-wide{{ end }}">
-            {{- partial "nav.html" . -}}
-            {{- block "main" . }}{{- end }}
+            <header class="site-header">
+                {{- partial "nav.html" . -}}
+            </header>
+            <main id="main">
+                {{- block "main" . }}{{- end }}
+            </main>
             {{- partial "footer.html" . -}}
         </div>
-    </main>
+    </div>
 </body>
 </html>
