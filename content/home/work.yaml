@@ -2,8 +2,8 @@ work:
   - company: Uber
     description: Software Engineer Intern
     url: https://www.uber.com/
-    start_date: July 2025
-    end_date: Sept 2025
+    start_date: Jul 2025
+    end_date: Sep 2025
 
   - company: MadrHacks
     description: Tutor, team member & CTF organizer
@@ -14,5 +14,5 @@ work:
   - company: UniUD E-Racing Team
     description: System Administrator
     url: https://formulasae.uniud.it
-    start_date: Nov. 2023
-    end_date: Sep. 2024
+    start_date: Nov 2023
+    end_date: Sep 2024

@@ -1,14 +1,21 @@
 education:
   - title: University of Udine
     url: https://www.uniud.it/en/
+    degree: Master's degree in Artificial Intelligence & Cybersecurity
+    start_date: Oct 2026
+    end_date: Apr 2029
+    logo: uniud.svg
+
+  - title: University of Udine
+    url: https://www.uniud.it/en/
     degree: Bachelor's degree in Computer Science
     start_date: Oct 2023
-    end_date: July 2026
+    end_date: Jul 2026
     logo: uniud.svg
 
   - title: I.S.I.S. A. Malignani
     url: https://www.malignani.edu.it/
     degree: High School Diploma in Telecommunications and Computer Science
-    start_date: Sept 2018
-    end_date: July 2023
+    start_date: Sep 2018
+    end_date: Jul 2023
     logo: malignani.webp
