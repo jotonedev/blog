@@ -5,6 +5,7 @@ education:
     start_date: Oct 2026
     end_date: Apr 2029
     logo: uniud.svg
+    background: white
 
   - title: University of Udine
     url: https://www.uniud.it/en/
@@ -12,6 +13,7 @@ education:
     start_date: Oct 2023
     end_date: Jul 2026
     logo: uniud.svg
+    background: white
 
   - title: I.S.I.S. A. Malignani
     url: https://www.malignani.edu.it/

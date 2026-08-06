@@ -28,8 +28,9 @@
                 {{- $logoName := index $item $ctx.logoKey }}
                 {{- $logoFile := "" }}
                 {{- with $ctx.logoFileKey }}{{ $logoFile = index $item . }}{{ end }}
+                {{- $logoBg := index $item "background" | default "transparent" }}
                 <div class="row-item">
-                    {{ partial "logo.html" (dict "name" ($logoName | default $title) "file" $logoFile) }}
+                    {{ partial "logo.html" (dict "name" ($logoName | default $title) "file" $logoFile "background" $logoBg) }}
                     <div class="row-main">
                         <h3 class="row-title">
                             {{- with $item.url -}}

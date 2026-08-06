@@ -2,8 +2,9 @@
   Renders the logo cell used by the work / education / certifications rows.
 
   Params:
-    name — display name, used to derive the asset slug and the fallback badge
-    file — optional explicit filename inside assets/company/
+    name       — display name, used to derive the asset slug and the fallback badge
+    file       — optional explicit filename inside assets/company/
+    background — optional background option: "transparent" (default), "white", "black"
 
   Looks for assets/company/<file>, then <slug>.svg / .png / .webp, and falls
   back to a gradient badge with the first letter. SVGs are minified.
@@ -18,7 +19,8 @@
 {{- if not $logo }}{{ $logo = resources.Get (printf "company/%s.svg" $slug) }}{{ end -}}
 {{- if not $logo }}{{ $logo = resources.Get (printf "company/%s.png" $slug) }}{{ end -}}
 {{- if not $logo }}{{ $logo = resources.Get (printf "company/%s.webp" $slug) }}{{ end -}}
-<div class="row-logo">
+{{- $bg := .background | default "transparent" | lower -}}
+<div class="row-logo{{ if or (eq $bg "white") (eq $bg "black") (eq $bg "transparent") }} logo-bg-{{ $bg }}{{ end }}">
 {{- with $logo -}}
     {{- $asset := . -}}
     {{- if eq .MediaType.SubType "svg" -}}
