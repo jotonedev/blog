@@ -16,8 +16,8 @@ projects:
       - Tool
 
   - title: "RESTberus"
-    description: "Kubernetes-based infrastructure for the assessment of REST API fuzzers against microservice architectures."
-    url: https://github.com/jotonedev/restberus
+    description: "Kubernetes-based infrastructure for the assessment of REST API fuzzers against microservice architectures. Currently private."
+    url: https://github.com/restberus/restberus
     banner: /images/projects/restberus.webp
     tags:
       - Python
