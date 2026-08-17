@@ -1,6 +1,6 @@
 ---
 title:  "WindTre ZTE H389X techdata"
-date:   2026-08-17T11:30:00+0100
+date:   2026-08-17T11:30:00+0200
 image: /images/posts/2026-08-17-zte-h389x/external.webp
 ---
 
@@ -20,6 +20,9 @@ There is some work underway to port a different ZTE CPU to the Linux kernel to a
 
 The software components used in the firmware that are subject to the GNU General Public License Version 2 or later are not publicly available on [opensource.ztedevices.com/](https://opensource.ztedevices.com/). Obtaining the source code requires sending an email to [tech.sp@zte.com.cn](mailto:tech.sp@zte.com.cn).
 
+Firmware updates are pushed using TR069 but an image is available in ZTE italian [website](https://www.zteitalia.it/download/389x_hv1000_fv1100p9/).
+The rootfs is encrypted with aes-128-cbc using the following key `H389X933f3d47dbc`.
+
 ## Photos of the internals
 
 ![Photo of the device](/images/posts/2026-08-17-zte-h389x/front.webp)
@@ -28,6 +31,6 @@ The software components used in the firmware that are subject to the GNU General
 
 ## References
 
-- https://orca.pet/wind3hub/ - Wind3 HUB notes (P7 firmware, U-Boot password, settings decryption)
-- https://www.zteitalia.it/download/ - firmware download page
-- https://www.acwifi.net/17312.html - another device with the same CPU
+- [orca.pet/wind3hub](https://orca.pet/wind3hub/) - Wind3 HUB notes (P7 firmware, U-Boot password, settings decryption)
+- [zteitalia.it/download/389x_hv1000_fv1100p9](https://www.zteitalia.it/download/389x_hv1000_fv1100p9/) - firmware download page ([archive page](https://archive.is/vZRgG))
+- [acwifi.net/17312.html](https://www.acwifi.net/17312.html) - another device with the same CPU
