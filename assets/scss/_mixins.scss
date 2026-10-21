@@ -14,7 +14,7 @@
 }
 
 @mixin accent-fill {
-  background: var(--gradient);
+  background: var(--accent);
   color: var(--on-accent);
   border-color: transparent;
   box-shadow: var(--shadow-accent);

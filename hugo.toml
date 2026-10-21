@@ -89,7 +89,7 @@ enableRobotsTXT        = true
   keywords    = ["John Toniutti", "jotone", "jotonedev"]
   email       = "contact@jotone.it"
   socialCard = "social-card.jpg"
-  themeColor = "#4f46e5"
+  themeColor = "#18181b"
 
   [params.theme_config]
     date_format       = "2006-01-02"
