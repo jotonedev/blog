@@ -1,4 +1,14 @@
 projects:
+  - title: "Weather Station"
+    description: "A weather station with 3D-printed enclosures and a microservice backend for storage, forecasting and visualization."
+    url: https://github.com/jotonedev/weather-station
+    banner: /images/projects/weather-station.webp
+    tags:
+      - Golang
+      - Python
+      - Timestral
+      - Uber Fx
+
   - title: "PyOWN"
     description: "A Python library for interacting with the OpenWebNet protocol for home automation."
     url: https://github.com/jotonedev/pyown
