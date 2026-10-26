@@ -6,8 +6,11 @@
 #             fails to load. Not displayed on the page.
 #   location: shown in the caption
 #   date:     optional, overrides the capture date read from EXIF
-#   device:   optional, overrides the camera read from EXIF. Use it for film,
-#             scans, or when the EXIF make/model reads badly.
+#   device:   optional, overrides the camera read from EXIF.
+
+- file: 2026_08_22-dignano.jpg
+  alt: Aerial view of the bridge over the Tagliamento river
+  location: Dignano, Italy
 
 - file: 2025_04_05-castions.jpg
   alt: Aerial view of a lake
