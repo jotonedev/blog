@@ -22,8 +22,9 @@
 <meta name="description" content="{{ $desc }}">
 <link rel="canonical" href="{{ .Permalink }}">
 <meta name="author" content="{{ site.Params.author }}">
-{{- with site.Params.keywords }}
-<meta name="keywords" content="{{ delimit . ", " }}">
+{{- $keywords := .Params.tags | default .Params.keywords | default site.Params.keywords -}}
+{{- with $keywords }}
+<meta name="keywords" content="{{ if reflect.IsSlice . }}{{ delimit . ", " }}{{ else }}{{ . }}{{ end }}">
 {{- end }}
 {{- if eq .Kind "404" }}
 <meta name="robots" content="noindex, follow">
@@ -50,6 +51,9 @@
 <meta property="article:modified_time" content="{{ .Lastmod.Format "2006-01-02T15:04:05Z07:00" }}">
 {{- end }}
 <meta property="article:author" content="{{ site.Params.author }}">
+{{- range (.Params.tags | default .Params.keywords) }}
+<meta property="article:tag" content="{{ . }}">
+{{- end }}
 {{- end }}
 
 {{- /* JSON-LD */}}
@@ -70,6 +74,10 @@
     "inLanguage" site.LanguageCode
   -}}
   {{- with $img.url }}{{ $schema = merge $schema (dict "image" .) }}{{ end -}}
+  {{- with (.Params.tags | default .Params.keywords) -}}
+    {{- $kwStr := cond (reflect.IsSlice .) (delimit . ", ") . -}}
+    {{- $schema = merge $schema (dict "keywords" $kwStr) -}}
+  {{- end -}}
 {{- else if .IsHome -}}
   {{- /* schema.org sameAs: the profile URLs already listed in contacts.yaml,
          so the links live in exactly one place. mailto: is not a profile. */ -}}

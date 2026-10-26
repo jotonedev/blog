@@ -1,7 +1,16 @@
 ---
 title:  "How to set up a webcam on the Neptune 4 Plus"
 date:   2026-07-21T10:22:00+0100
+description: "Step-by-step guide on configuring a USB webcam with webcamd and Fluidd on the Elegoo Neptune 4 Plus 3D printer."
 image: /images/posts/neptune-webcam-setup/3d-printer.webp
+tags:
+  - 3D Printing
+  - Klipper
+  - Linux
+  - Tutorial
+  - Elegoo
+  - Neptune 4 Plus
+  - Webcam
 ---
 
 ## 0. Introduction

@@ -1,7 +1,14 @@
 ---
 title:  "WindTre ZTE H389X techdata"
 date:   2026-08-17T11:30:00+0200
+description: "Technical specifications, teardown photos and rootfs encryption details for the WindTre ZTE H389X router."
 image: /images/posts/2026-08-17-zte-h389x/external.webp
+tags:
+  - Networking
+  - Hardware
+  - Router
+  - Reverse Engineering
+  - OpenWrt
 ---
 
 ![Photo of the device](/images/posts/2026-08-17-zte-h389x/external.webp)
