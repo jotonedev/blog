@@ -65,7 +65,7 @@
     border-color var(--speed) var(--ease), box-shadow var(--speed) var(--ease),
     transform var(--speed) var(--ease);
 
-  --max-content-width: 640px;
+  --max-content-width: 800px;
 }
 
 @media (prefers-color-scheme: dark) {
