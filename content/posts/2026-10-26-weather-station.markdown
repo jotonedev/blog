@@ -1,5 +1,5 @@
 ---
-title: "Another Weather Station"
+title: "Another Weather Station - Oasi"
 date: 2026-10-26T21:35:00+01:00
 description: "Building a personal weather station with 3D printed sensor enclosures and a Go microservice backend for forecasting."
 image: /images/posts/2026-10-26-weather-station/stevenson-screen.webp
@@ -16,6 +16,7 @@ tags:
 ---
 
 I have wanted to build a personal weather station to collect local data and experiment with weather forecasting for a long time. The complete source code and design files are available on [GitHub](https://github.com/jotonedev/weather-station).
+The codename for this project is "Oasi".
 
 ## System architecture
 
