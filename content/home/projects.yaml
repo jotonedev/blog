@@ -1,5 +1,5 @@
 projects:
-  - title: "Weather Station"
+  - title: "Oasi"
     description: "A weather station with 3D-printed enclosures and a microservice backend for storage, forecasting and visualization."
     url: https://github.com/jotonedev/weather-station
     banner: /images/projects/weather-station.webp
