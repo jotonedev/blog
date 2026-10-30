@@ -1,5 +1,5 @@
 ---
-title: "Another Weather Station - Oasi"
+title: "Yet Another Weather Station - Oasi"
 date: 2026-10-26T21:35:00+01:00
 description: "Building a personal weather station with 3D printed sensor enclosures and a Go microservice backend for forecasting."
 image: /images/posts/2026-10-26-weather-station/stevenson-screen.webp
