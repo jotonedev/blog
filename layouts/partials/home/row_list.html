@@ -44,10 +44,10 @@
                         {{- end }}
                     </div>
                     {{- with $item.date }}
-                    <div class="row-period"><span>{{ . }}</span></div>
+                    <div class="row-period">{{ . }}</div>
                     {{- else }}
                         {{- if or $item.start_date $item.end_date }}
-                    <div class="row-period"><span>{{ $item.start_date }} - {{ $item.end_date }}</span></div>
+                    <div class="row-period">{{ $item.start_date }} - {{ $item.end_date }}</div>
                         {{- end }}
                     {{- end }}
                 </div>

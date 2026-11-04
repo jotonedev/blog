@@ -6,5 +6,12 @@
     {{- end }}
 </div>
 
-{{ partial "post_list.html" (dict "pages" .Pages) }}
+{{- if site.Params.theme_config.isListGroupByDate }}
+    {{- range .Pages.GroupByDate "2006" }}
+    <h2 class="year-group-title">{{ .Key }}</h2>
+    {{- partial "post_list.html" (dict "pages" .Pages) }}
+    {{- end }}
+{{- else }}
+    {{- partial "post_list.html" (dict "pages" .Pages) }}
+{{- end }}
 {{ end }}

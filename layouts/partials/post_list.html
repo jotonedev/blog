@@ -16,7 +16,7 @@
     {{- range $posts }}
     <a href="{{ .RelPermalink }}" class="post-card-item">
         <div class="post-card-main">
-            <h3 class="post-card-title">{{ .Title }}</h3>
+            <h2 class="post-card-title">{{ .Title }}</h2>
             {{- with .Summary }}
             <p class="post-card-summary">{{ . | plainify | chomp | truncate 120 }}</p>
             {{- end }}

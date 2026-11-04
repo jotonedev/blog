@@ -4,7 +4,15 @@
         <h1 class="single-post-title">{{ .Title }}</h1>
         {{- if not .Date.IsZero }}
         <div class="single-post-meta">
-            <time datetime="{{ .Date.Format "2006-01-02T15:04:05Z07:00" }}">{{ .Date | time.Format site.Params.theme_config.date_format }}</time>
+            <time datetime="{{ .Date.Format "2006-01-02T15:04:05Z07:00" }}">{{ .Date | time.Format "January 02, 2006" }}</time>
+            {{- if gt .Lastmod .Date }}
+            <span aria-hidden="true">·</span>
+            <span>updated {{ .Lastmod | time.Format "January 02, 2006" }}</span>
+            {{- end }}
+            {{- with .ReadingTime }}
+            <span aria-hidden="true">·</span>
+            <span>{{ . }} min read</span>
+            {{- end }}
         </div>
         {{- end }}
     </header>

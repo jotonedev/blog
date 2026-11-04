@@ -1,17 +1,15 @@
 <!DOCTYPE html>
-<html lang="{{ site.LanguageCode }}">
+<html lang="{{ site.Language.Locale }}">
 {{- partial "head.html" . -}}
 <body>
-    <div class="page-content">
-        <div class="w{{ if .Params.wide }} w-wide{{ end }}">
-            <header class="site-header">
-                {{- partial "nav.html" . -}}
-            </header>
-            <main id="main">
-                {{- block "main" . }}{{- end }}
-            </main>
-            {{- partial "footer.html" . -}}
-        </div>
+    <div class="w{{ if .Params.wide }} w-wide{{ end }}">
+        <header class="site-header">
+            {{- partial "nav.html" . -}}
+        </header>
+        <main id="main">
+            {{- block "main" . }}{{- end }}
+        </main>
+        {{- partial "footer.html" . -}}
     </div>
 </body>
 </html>

@@ -21,14 +21,14 @@
         {{- if lt (len $capped.Content) (len .Content) }}{{ $main = $capped }}{{ end -}}
     {{- end -}}
     {{- $srcset := slice -}}
-    {{- if gt $main.Width 640 -}}
-        {{- $half := $main.Resize "640x webp q85" -}}
+    {{- if gt $main.Width 752 -}}
+        {{- $half := $main.Resize "752x webp q85" -}}
         {{- if lt (len $half.Content) (len $main.Content) -}}
-            {{- $srcset = slice (printf "%s 640w" $half.RelPermalink) (printf "%s %dw" $main.RelPermalink $main.Width) -}}
+            {{- $srcset = slice (printf "%s 752w" $half.RelPermalink) (printf "%s %dw" $main.RelPermalink $main.Width) -}}
         {{- end -}}
     {{- end -}}
     <img src="{{ $main.RelPermalink }}"
-        {{- with $srcset }} srcset="{{ delimit . ", " }}" sizes="(max-width: 688px) 100vw, 640px"{{ end }}
+        {{- with $srcset }} srcset="{{ delimit . ", " }}" sizes="(max-width: 800px) calc(100vw - 3rem), 752px"{{ end }}
          width="{{ $main.Width }}" height="{{ $main.Height }}"
          alt="{{ $alt }}" loading="lazy" decoding="async">
 {{- else -}}

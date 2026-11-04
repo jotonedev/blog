@@ -37,17 +37,12 @@
 }
 
 // -------------- CONTACT ICON BUTTONS -------------- //
-.contacts-centered {
-  display: flex;
-  justify-content: center;
-  margin: 1.25rem 0 0.5rem;
-}
-
 .contacts-buttons {
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 0.85rem;
+  margin: 1.25rem 0 0.5rem;
 }
 
 .contact-icon-button {
