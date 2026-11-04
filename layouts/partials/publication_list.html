@@ -1,0 +1,128 @@
+{{- /*
+  Renders the publications list, grouped by year, newest first.
+*/ -}}
+
+{{- $items := slice -}}
+{{- $publicationsPage := site.GetPage "/publications" -}}
+{{- $publicationsData := slice -}}
+{{- with $publicationsPage.Resources.GetMatch "publications.yaml" -}}
+  {{- with . | transform.Unmarshal -}}
+    {{- if reflect.IsMap . -}}
+      {{- with .publications }}{{ $publicationsData = . }}{{ end -}}
+    {{- else if reflect.IsSlice . -}}
+      {{- $publicationsData = . -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+
+{{- range $publicationsData -}}
+  {{- if not .title -}}
+    {{- warnf "publication_list: entry in content/publications/publications.yaml has no `title` key, skipping" -}}
+  {{- else -}}
+    {{- $authors := "" -}}
+    {{- with .authors -}}
+      {{- if reflect.IsSlice . -}}
+        {{- $authors = delimit . ", " -}}
+      {{- else -}}
+        {{- $authors = string . -}}
+      {{- end -}}
+    {{- end -}}
+    {{- if not $authors -}}
+      {{- warnf "publication_list: %q has no `authors` in content/publications/publications.yaml" .title -}}
+    {{- end -}}
+
+    {{- $venue := .venue | default .published | default .published_in | default "" -}}
+
+    {{- $year := "" -}}
+    {{- $sortkey := "" -}}
+    {{- with .year -}}
+      {{- $year = string . -}}
+      {{- $sortkey = printf "%s-00-00" $year -}}
+    {{- end -}}
+    {{- with .date -}}
+      {{- $dStr := string . -}}
+      {{- if findRE `^\d{4}$` $dStr -}}
+        {{- if not $year }}{{ $year = $dStr }}{{ end -}}
+        {{- $sortkey = printf "%s-00-00" $dStr -}}
+      {{- else -}}
+        {{- $t := time.AsTime . -}}
+        {{- if not $t.IsZero -}}
+          {{- if not $year }}{{ $year = $t.Format "2006" }}{{ end -}}
+          {{- $sortkey = $t.Format "2006-01-02" -}}
+        {{- end -}}
+      {{- end -}}
+    {{- end -}}
+    {{- if not $year -}}
+      {{- warnf "publication_list: %q has no `year` or `date` in content/publications/publications.yaml" .title -}}
+    {{- end -}}
+
+    {{- $pdfURL := "" -}}
+    {{- $rawFile := .file | default .pdf | default .url | default "" -}}
+    {{- if $rawFile -}}
+      {{- if or (hasPrefix $rawFile "http://") (hasPrefix $rawFile "https://") -}}
+        {{- $pdfURL = $rawFile -}}
+      {{- else if hasPrefix $rawFile "/" -}}
+        {{- $pdfURL = $rawFile | relURL -}}
+      {{- else -}}
+        {{- $res := $publicationsPage.Resources.GetMatch $rawFile -}}
+        {{- if not $res -}}
+          {{- $res = resources.Get (printf "publications/%s" $rawFile) | default (resources.Get $rawFile) -}}
+        {{- end -}}
+        {{- if $res -}}
+          {{- $pdfURL = $res.RelPermalink -}}
+        {{- else -}}
+          {{- warnf "publication_list: %q is listed in content/publications/publications.yaml but missing from content/publications/" $rawFile -}}
+        {{- end -}}
+      {{- end -}}
+    {{- end -}}
+
+    {{- $items = $items | append (dict
+      "title" .title
+      "authors" $authors
+      "venue" $venue
+      "year" $year
+      "sortkey" $sortkey
+      "pdfURL" $pdfURL
+    ) -}}
+  {{- end -}}
+{{- end -}}
+
+{{- with sort $items "sortkey" "desc" }}
+  {{- $sorted := . -}}
+  {{- $years := slice -}}
+  {{- range $sorted -}}
+    {{- if not (in $years .year) -}}
+      {{- $years = $years | append .year -}}
+    {{- end -}}
+  {{- end -}}
+
+<div class="publications-feed">
+  {{- range $y := $years }}
+  <section class="publication-year-group">
+    {{- if $y }}
+    <h2 class="publication-year">{{ $y }}</h2>
+    {{- end }}
+    <ul class="publication-list">
+      {{- range where $sorted "year" $y }}
+      <li class="publication-item">
+        <p class="publication-title">{{ .title }}</p>
+        {{- with .authors }}
+        <p class="publication-authors">{{ . }}</p>
+        {{- end }}
+        {{- with .venue }}
+        <p class="publication-venue">{{ . }}</p>
+        {{- end }}
+        {{- with .pdfURL }}
+        <div class="publication-actions">
+          <a href="{{ . }}" target="_blank" rel="noopener" class="publication-pdf">PDF</a>
+        </div>
+        {{- end }}
+      </li>
+      {{- end }}
+    </ul>
+  </section>
+  {{- end }}
+</div>
+{{- else }}
+<p class="publication-empty">No publications yet.</p>
+{{- end }}

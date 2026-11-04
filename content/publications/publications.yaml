@@ -1,0 +1,15 @@
+# One entry per paper. Order does not matter here — the page groups by year
+# and sorts newest first.
+#
+#   title:   required, paper title
+#   authors: required, authors (comma-separated string or YAML list)
+#   year:    required, publication year (e.g. 2026) or `date` (YYYY-MM-DD)
+#   venue:   optional, conference, journal, or workshop where it was published
+#   file:    required, PDF filename inside content/publications/ (or a URL)
+#
+# Example:
+# - title: "Paper Title"
+#   authors: "John Toniutti, Coauthor Name"
+#   year: 2026
+#   venue: "Proceedings of the Conference Name (2026)"
+#   file: paper.pdf
