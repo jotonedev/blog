@@ -3,7 +3,14 @@ aliases:
   - /2025/11/26/snakectf-2025-finals
 title:  "SnakeCTF 2025 Finals - my experience"
 date:   2025-11-26T12:19:00+0100
+description: "Organizing the SnakeCTF 2025 Finals in Lignano Sabbiadoro and designing Go microservice and voice-LLM hardware CTF challenges."
 image: /images/posts/snakectf-2025-finals/snakectf_2025_finals_01.webp
+tags:
+  - CTF
+  - Cybersecurity
+  - Golang
+  - LLM
+  - MadrHacks
 ---
 
 Hi everyone!

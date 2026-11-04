@@ -3,7 +3,13 @@ aliases:
   - /2024/11/07/pyown-dev
 title:  "PyOWN development"
 date:   2024-11-07T22:34:00+0100
+description: "Developing PyOWN, an asynchronous Python library for interacting with the BTicino/Legrand OpenWebNet home automation protocol."
 image: /images/posts/pyown-dev/openwebnet_pyown.webp
+tags:
+  - Python
+  - OpenWebNet
+  - Home Automation
+  - IoT
 ---
 
 Long time no see!

@@ -3,7 +3,14 @@ aliases:
   - /2023/01/28/openwebnet-dissector
 title:  "An OpenWebNet dissector for Wireshark"
 date:   2023-01-28T16:11:44+0100
+description: "Writing a Lua Wireshark dissector to inspect and decode BTicino OpenWebNet home automation traffic."
 image: /images/posts/openwebnet-dissector/openwebnet_dissector.webp
+tags:
+  - OpenWebNet
+  - Wireshark
+  - Lua
+  - Home Automation
+  - Networking
 ---
 
 I recently noted there is no dissector yet for the protocol OpenWebNet. So, I developed one.

@@ -3,7 +3,13 @@ aliases:
   - /2023/01/16/first-post
 title:  "First post!"
 date:   2023-01-16T17:40:28+0100
+description: "Building my first personal blog in Go, deployed on a two-node Docker Swarm behind Cloudflare."
 image: /images/posts/first-post/golang.webp
+tags:
+  - Golang
+  - Docker
+  - Cloudflare
+  - Web Development
 ---
 
 Written in Go.

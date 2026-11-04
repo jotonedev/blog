@@ -3,6 +3,11 @@ aliases:
   - /2024/03/01/tallneck-improvements
 title:  "Tallneck improved"
 date:   2024-03-01T14:24:28+0100
+description: "Rewriting the Tallneck blog theme with SCSS, dark mode syntax highlighting, PWA support, and 100/100 Lighthouse scores."
+tags:
+  - SCSS
+  - Web Performance
+  - PWA
 ---
 
 I've rewritten the entire theme with the objective of making it more readable and faster. I've also improved the design to make it more appealing.
