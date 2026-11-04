@@ -1,9 +1,12 @@
 baseURL                = "https://jotone.it/"
-languageCode           = "en-us"
 defaultContentLanguage = "en"
 title                  = "Jotone's blog"
 copyright              = "John Toniutti"
 enableRobotsTXT        = true
+
+[languages]
+  [languages.en]
+    locale = "en-us"
 
 [taxonomies]
 
@@ -44,7 +47,8 @@ enableRobotsTXT        = true
     target = "assets/images"
 
 [outputs]
-  home = ["HTML", "RSS"]
+  home    = ["HTML", "RSS"]
+  section = ["HTML"]
 
 [sitemap]
   changefreq = "monthly"
@@ -52,9 +56,14 @@ enableRobotsTXT        = true
   priority   = 0.5
 
 [imaging]
-  quality        = 85
   resampleFilter = "Lanczos"
-  bgColor = "#ffffff"
+  bgColor        = "#ffffff"
+  [imaging.jpeg]
+    quality = 85
+  [imaging.webp]
+    quality = 85
+  [imaging.avif]
+    quality = 70
 
 [markup]
   [markup.goldmark]
