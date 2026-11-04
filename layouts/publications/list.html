@@ -1,0 +1,10 @@
+{{ define "main" }}
+<div class="page-heading">
+    <h1>{{ .Title }}</h1>
+    {{- with .Content }}
+    <div class="page-heading-description">{{ . }}</div>
+    {{- end }}
+</div>
+
+{{ partial "publication_list.html" . }}
+{{ end }}

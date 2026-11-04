@@ -1,0 +1,150 @@
+{{- /*
+  Renders the publications list, grouped by year, newest first.
+*/ -}}
+
+{{- $items := slice -}}
+{{- $publicationsPage := site.GetPage "/publications" -}}
+{{- $publicationsData := slice -}}
+{{- with $publicationsPage.Resources.GetMatch "publications.yaml" -}}
+  {{- with . | transform.Unmarshal -}}
+    {{- if reflect.IsMap . -}}
+      {{- with .publications }}{{ $publicationsData = . }}{{ end -}}
+    {{- else if reflect.IsSlice . -}}
+      {{- $publicationsData = . -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+
+{{- range $publicationsData -}}
+  {{- if not .title -}}
+    {{- warnf "publication_list: entry in content/publications/publications.yaml has no `title` key, skipping" -}}
+  {{- else -}}
+    {{- $authors := "" -}}
+    {{- with .authors -}}
+      {{- if reflect.IsSlice . -}}
+        {{- $authors = delimit . ", " -}}
+      {{- else -}}
+        {{- $authors = string . -}}
+      {{- end -}}
+    {{- end -}}
+    {{- if not $authors -}}
+      {{- warnf "publication_list: %q has no `authors` in content/publications/publications.yaml" .title -}}
+    {{- end -}}
+
+    {{- $venue := .venue | default .published | default .published_in | default "" -}}
+    {{- $url := .url | default "" -}}
+    {{- $gitURL := .git | default .repo | default .code | default "" -}}
+
+    {{- $year := "" -}}
+    {{- $sortkey := "" -}}
+    {{- with .year -}}
+      {{- $year = string . -}}
+      {{- $sortkey = printf "%s-00-00" $year -}}
+    {{- end -}}
+    {{- with .date -}}
+      {{- $dStr := string . -}}
+      {{- if findRE `^\d{4}$` $dStr -}}
+        {{- if not $year }}{{ $year = $dStr }}{{ end -}}
+        {{- $sortkey = printf "%s-00-00" $dStr -}}
+      {{- else -}}
+        {{- $t := time.AsTime . -}}
+        {{- if not $t.IsZero -}}
+          {{- if not $year }}{{ $year = $t.Format "2006" }}{{ end -}}
+          {{- $sortkey = $t.Format "2006-01-02" -}}
+        {{- end -}}
+      {{- end -}}
+    {{- end -}}
+    {{- if not $year -}}
+      {{- warnf "publication_list: %q has no `year` or `date` in content/publications/publications.yaml" .title -}}
+    {{- end -}}
+
+    {{- $pdfURL := "" -}}
+    {{- $rawFile := .file | default .pdf | default "" -}}
+    {{- if $rawFile -}}
+      {{- if or (hasPrefix $rawFile "http://") (hasPrefix $rawFile "https://") -}}
+        {{- $pdfURL = $rawFile -}}
+      {{- else if hasPrefix $rawFile "/" -}}
+        {{- $pdfURL = $rawFile | relURL -}}
+      {{- else -}}
+        {{- $res := $publicationsPage.Resources.GetMatch $rawFile -}}
+        {{- if not $res -}}
+          {{- $res = resources.Get (printf "publications/%s" $rawFile) | default (resources.Get $rawFile) -}}
+        {{- end -}}
+        {{- if $res -}}
+          {{- $pdfURL = $res.RelPermalink -}}
+        {{- else -}}
+          {{- warnf "publication_list: %q is listed in content/publications/publications.yaml but missing from content/publications/" $rawFile -}}
+        {{- end -}}
+      {{- end -}}
+    {{- end -}}
+
+    {{- $items = $items | append (dict
+      "title" .title
+      "url" $url
+      "authors" $authors
+      "venue" $venue
+      "year" $year
+      "sortkey" $sortkey
+      "pdfURL" $pdfURL
+      "gitURL" $gitURL
+    ) -}}
+  {{- end -}}
+{{- end -}}
+
+{{- with sort $items "sortkey" "desc" }}
+  {{- $sorted := . -}}
+  {{- $years := slice -}}
+  {{- range $sorted -}}
+    {{- if not (in $years .year) -}}
+      {{- $years = $years | append .year -}}
+    {{- end -}}
+  {{- end -}}
+
+<div class="publications-feed">
+  {{- range $y := $years }}
+  <section class="publication-year-group">
+    {{- if $y }}
+    <h2 class="publication-year">{{ $y }}</h2>
+    {{- end }}
+    <ul class="publication-list">
+      {{- range where $sorted "year" $y }}
+      {{- $pub := . }}
+      <li class="publication-item">
+        <p class="publication-title">
+          {{- with $pub.url -}}
+            <a href="{{ . }}" target="_blank" rel="noopener noreferrer">{{ $pub.title }}</a>
+          {{- else -}}
+            {{ $pub.title }}
+          {{- end -}}
+        </p>
+        {{- with $pub.authors }}
+        <p class="publication-authors">{{ . }}</p>
+        {{- end }}
+        {{- with $pub.venue }}
+        <p class="publication-venue">{{ . }}</p>
+        {{- end }}
+        {{- if or $pub.pdfURL $pub.gitURL }}
+        <div class="publication-actions">
+          {{- with $pub.pdfURL }}
+          <a href="{{ . }}" target="_blank" rel="noopener" class="publication-badge">
+            <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><line x1="10" y1="9" x2="8" y2="9"/></svg>
+            <span>PDF</span>
+          </a>
+          {{- end }}
+          {{- with $pub.gitURL }}
+          <a href="{{ . }}" target="_blank" rel="noopener noreferrer" class="publication-badge">
+            <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="6" y1="3" x2="6" y2="15"/><circle cx="18" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><path d="M18 9a9 9 0 0 1-9 9"/></svg>
+            <span>Git</span>
+          </a>
+          {{- end }}
+        </div>
+        {{- end }}
+      </li>
+      {{- end }}
+    </ul>
+  </section>
+  {{- end }}
+</div>
+{{- else }}
+<p class="publication-empty">No publications yet.</p>
+{{- end }}
