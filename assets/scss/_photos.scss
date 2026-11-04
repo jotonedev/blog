@@ -54,10 +54,6 @@ a.photo-frame {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .photo-frame {
-    transition: none;
-  }
-
   a.photo-frame:hover {
     transform: none;
   }

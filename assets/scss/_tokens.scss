@@ -24,10 +24,12 @@
   // Accent
   --accent: #18181b;
   --accent-hover: #27272a;
-  --accent-alt: #3f3f46;
   --on-accent: #fafafa;
   --accent-shadow: rgba(24, 24, 27, 0.14);
-  --gradient: linear-gradient(135deg, var(--accent) 0%, var(--accent-alt) 100%);
+
+  // Fixed logo backdrops
+  --logo-bg-white: #ffffff;
+  --logo-bg-black: #000000;
 
   // Elevation
   --shadow-sm: 0 4px 14px rgba(0, 0, 0, 0.04);
@@ -80,11 +82,9 @@
     --text: #fafafa;
     --text-body: #e4e4e7;
     --text-muted: #a1a1aa;
-    --text-subtle: #71717a;
 
     --accent: #f4f4f5;
     --accent-hover: #ffffff;
-    --accent-alt: #d4d4d8;
     --on-accent: #0c0c0e;
     --accent-shadow: rgba(0, 0, 0, 0.35);
 

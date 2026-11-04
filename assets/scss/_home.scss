@@ -77,8 +77,6 @@
 
 // -------------- ABOUT -------------- //
 .about {
-  text-align: left;
-
   .about-text {
     color: var(--text-muted);
     font-size: 0.98rem;
@@ -135,19 +133,17 @@
     border-radius: var(--radius-sm);
     overflow: hidden;
 
-    &.logo-bg-white {
-      background-color: #ffffff;
+    &.logo-bg-white,
+    &.logo-bg-black {
       padding: 4px;
+    }
+
+    &.logo-bg-white {
+      background-color: var(--logo-bg-white);
     }
 
     &.logo-bg-black {
-      background-color: #000000;
-      padding: 4px;
-    }
-
-    &.logo-bg-transparent {
-      background-color: transparent;
-      padding: 0;
+      background-color: var(--logo-bg-black);
     }
 
     img {
@@ -188,7 +184,8 @@
       text-decoration: none;
 
       &:hover {
-        color: var(--accent);
+        text-decoration: underline;
+        text-underline-offset: 2px;
       }
     }
   }
@@ -251,10 +248,6 @@
 }
 
 // -------------- SKILLS -------------- //
-.skills {
-  text-align: left;
-}
-
 .skills-badges {
   display: flex;
   flex-wrap: wrap;
@@ -280,10 +273,6 @@
 }
 
 // -------------- PROJECTS -------------- //
-.projects {
-  text-align: left;
-}
-
 .projects-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -331,10 +320,9 @@
   }
 
   .project-banner-placeholder {
-    color: var(--on-accent);
+    color: var(--text-muted);
     font-weight: 700;
     font-size: 1.1rem;
-    opacity: 0.9;
   }
 
   .project-body {

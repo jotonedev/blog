@@ -46,7 +46,6 @@ h2 {
   font-size: 1.35rem;
   font-weight: 700;
   margin: 1.2rem 0 0.6rem;
-  text-align: left;
 }
 
 code,
@@ -58,8 +57,7 @@ pre {
 
 // Keyboard navigation stays visible; mouse clicks stay clean.
 :focus-visible {
-  outline: 2px solid var(--accent);
-  outline-offset: 2px;
+  @include focus-ring;
 }
 
 // Respect users who ask the OS to tone motion down.

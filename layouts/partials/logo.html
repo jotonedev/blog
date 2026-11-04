@@ -7,7 +7,7 @@
     background — optional background option: "transparent" (default), "white", "black"
 
   Looks for assets/company/<file>, then <slug>.svg / .png / .webp, and falls
-  back to a gradient badge with the first letter. SVGs are minified.
+  back to an accent badge with the first letter. SVGs are minified.
   alt is empty on purpose: the row always shows the name as adjacent text, so
   captioning the logo too would just make screen readers say it twice.
 */ -}}
@@ -20,7 +20,7 @@
 {{- if not $logo }}{{ $logo = resources.Get (printf "company/%s.png" $slug) }}{{ end -}}
 {{- if not $logo }}{{ $logo = resources.Get (printf "company/%s.webp" $slug) }}{{ end -}}
 {{- $bg := .background | default "transparent" | lower -}}
-<div class="row-logo{{ if or (eq $bg "white") (eq $bg "black") (eq $bg "transparent") }} logo-bg-{{ $bg }}{{ end }}">
+<div class="row-logo{{ if or (eq $bg "white") (eq $bg "black") }} logo-bg-{{ $bg }}{{ end }}">
 {{- with $logo -}}
     {{- $asset := . -}}
     {{- if eq .MediaType.SubType "svg" -}}
