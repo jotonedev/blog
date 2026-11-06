@@ -6,8 +6,8 @@
 #   file:    optional, PDF filename inside content/publications/ (or a URL)
 #   git:     optional, URL to the source code repository
 
-- title: "RESTberus: Trace-Aware Benchmarking of Automated REST API Testing Tools Across Microservice Dependencies"
-  authors: "John Toniutti, Massimiliano Baldo, Marino Miculan, Vincenzo Riccio"
-  date: 2026-11-03
-  url: https://arxiv.org/abs/2611.04769
-  file: 2026-restberus-preprint.pdf
+#- title: "RESTberus: Trace-Aware Benchmarking of Automated REST API Testing Tools Across Microservice Dependencies"
+#  authors: "John Toniutti, Massimiliano Baldo, Marino Miculan, Vincenzo Riccio"
+#  date: 2026-11-03
+#  url: https://arxiv.org/abs/2611.04769
+#  file: 2026-restberus-preprint.pdf
