@@ -2,6 +2,7 @@ html {
   box-sizing: border-box;
   block-size: 100%;
   background-color: var(--bg);
+  scrollbar-gutter: stable;
 }
 
 *,
