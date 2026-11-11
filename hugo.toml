@@ -46,8 +46,19 @@ enableRobotsTXT        = true
     source = "images"
     target = "assets/images"
 
+[mediaTypes]
+  [mediaTypes."text/plain"]
+    suffixes = ["txt"]
+
+[outputFormats]
+  [outputFormats.LLMSTXT]
+    mediaType = "text/plain"
+    baseName = "llms"
+    isPlainText = true
+    notAlternative = true
+
 [outputs]
-  home    = ["HTML", "RSS"]
+  home    = ["HTML", "RSS", "LLMSTXT"]
   section = ["HTML"]
 
 [sitemap]

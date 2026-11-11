@@ -21,6 +21,10 @@
   <link rel="alternate" type="{{ .MediaType.Type }}" href="{{ .Permalink }}" title="{{ site.Title }}">
   {{- end }}
 
+  {{- with site.Home.OutputFormats.Get "llmstxt" }}
+  <link rel="alternate" type="text/markdown" href="{{ .Permalink }}" title="LLMs.txt">
+  {{- end }}
+
   {{- if .IsHome }}
   {{- $profile := resources.Get "profile.webp" | default (resources.Get "images/profile.webp") }}
   {{- with $profile }}

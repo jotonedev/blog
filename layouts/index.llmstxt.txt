@@ -1,0 +1,42 @@
+# {{ site.Params.author | default site.Title }}
+
+> Personal blog and technical portfolio of John Toniutti. Software engineering, systems, cybersecurity, IoT, and reverse engineering.
+
+## Blog Posts
+
+{{ range where site.RegularPages "Section" "posts" -}}
+- [{{ .Title }}]({{ .Permalink }}): {{ with .Description }}{{ . | plainify | chomp }}{{ else }}{{ .Summary | plainify | chomp | truncate 160 }}{{ end }} ({{ .Date.Format "2006-01-02" }})
+{{ end }}
+## Projects
+
+{{ $home := site.GetPage "/home" -}}
+{{ with $home.Resources.GetMatch "projects.yaml" -}}
+  {{ $data := .Content | transform.Unmarshal -}}
+  {{ range $data.projects -}}
+- [{{ .title }}]({{ .url }}): {{ .description }}
+{{ end -}}
+{{ end -}}
+
+{{- $publicationsPage := site.GetPage "/publications" -}}
+{{- $publicationsData := slice -}}
+{{- with $publicationsPage.Resources.GetMatch "publications.yaml" -}}
+  {{- with . | transform.Unmarshal -}}
+    {{- if reflect.IsMap . -}}
+      {{- with .publications }}{{ $publicationsData = . }}{{ end -}}
+    {{- else if reflect.IsSlice . -}}
+      {{- $publicationsData = . -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+{{- with $publicationsData }}
+## Publications
+
+{{ range . -}}
+- [{{ .title }}]({{ with .url }}{{ . }}{{ else }}{{ $publicationsPage.Permalink }}{{ end }}): {{ with .venue }}{{ . }}. {{ end }}{{ with .authors }}{{ if reflect.IsSlice . }}{{ delimit . ", " }}{{ else }}{{ . }}{{ end }}{{ end }}
+{{ end -}}
+{{ end }}
+## Optional
+
+- [Publications Archive]({{ "publications/" | absURL }}): Academic papers and research writeups.
+- [Photos Feed]({{ "photos/" | absURL }}): Photography feed and camera captures.
+- [RSS Feed]({{ "index.xml" | absURL }}): Machine-readable RSS feed of all blog posts.
