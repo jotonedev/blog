@@ -4,9 +4,14 @@
         {{- if not $profile }}{{ $profile = resources.Get "images/profile.webp" }}{{ end }}
         {{- with $profile }}
             {{- /* Displayed at 120px; ship 240px for 2x screens instead of the 720px original. */}}
-            {{- $avatar := cond (gt .Width 240) (.Resize "240x240 webp q85") . }}
-        <img src="{{ $avatar.RelPermalink }}" alt="John Toniutti" class="profile-img"
-             width="120" height="120" fetchpriority="high" decoding="async">
+            {{- $avif := cond (gt .Width 240) (.Resize "240x240 avif q70") (.Resize (printf "%dx%d avif q70" .Width .Height)) }}
+            {{- $webp := cond (gt .Width 240) (.Resize "240x240 webp q85") . }}
+        <picture>
+            <source srcset="{{ $avif.RelPermalink }}" type="image/avif">
+            <source srcset="{{ $webp.RelPermalink }}" type="image/webp">
+            <img src="{{ $webp.RelPermalink }}" alt="John Toniutti" class="profile-img"
+                 width="120" height="120" fetchpriority="high" decoding="async">
+        </picture>
         {{- end }}
     </div>
 

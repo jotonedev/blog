@@ -299,6 +299,11 @@
 }
 
 // -------------- SKILLS -------------- //
+.skills {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 120px;
+}
+
 .skills-badges {
   display: flex;
   flex-wrap: wrap;
@@ -328,6 +333,11 @@
 }
 
 // -------------- PROJECTS -------------- //
+.projects {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 600px;
+}
+
 .projects-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);

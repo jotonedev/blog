@@ -21,6 +21,14 @@
   <link rel="alternate" type="{{ .MediaType.Type }}" href="{{ .Permalink }}" title="{{ site.Title }}">
   {{- end }}
 
+  {{- if .IsHome }}
+  {{- $profile := resources.Get "profile.webp" | default (resources.Get "images/profile.webp") }}
+  {{- with $profile }}
+    {{- $avif := cond (gt .Width 240) (.Resize "240x240 avif q70") (.Resize (printf "%dx%d avif q70" .Width .Height)) }}
+  <link rel="preload" as="image" href="{{ $avif.RelPermalink }}" type="image/avif" fetchpriority="high">
+  {{- end }}
+  {{- end }}
+
   <script type="speculationrules">
   {
     "prerender": [
