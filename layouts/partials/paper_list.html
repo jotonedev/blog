@@ -1,0 +1,152 @@
+{{- /*
+  Renders the papers list, grouped by year, newest first.
+*/ -}}
+
+{{- $items := slice -}}
+{{- $papersPage := site.GetPage "/papers" | default (site.GetPage "/publications") -}}
+{{- $papersData := slice -}}
+{{- with or ($papersPage.Resources.GetMatch "papers.yaml") ($papersPage.Resources.GetMatch "publications.yaml") -}}
+  {{- with . | transform.Unmarshal -}}
+    {{- if reflect.IsMap . -}}
+      {{- with .papers }}{{ $papersData = . }}{{ else }}{{ with .publications }}{{ $papersData = . }}{{ end }}{{ end -}}
+    {{- else if reflect.IsSlice . -}}
+      {{- $papersData = . -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+
+{{- range $papersData -}}
+  {{- if not .title -}}
+    {{- warnf "paper_list: entry in content/papers/papers.yaml has no `title` key, skipping" -}}
+  {{- else -}}
+    {{- $authors := "" -}}
+    {{- with .authors -}}
+      {{- if reflect.IsSlice . -}}
+        {{- $authors = delimit . ", " -}}
+      {{- else -}}
+        {{- $authors = string . -}}
+      {{- end -}}
+    {{- end -}}
+    {{- if not $authors -}}
+      {{- warnf "paper_list: %q has no `authors` in content/papers/papers.yaml" .title -}}
+    {{- end -}}
+
+    {{- $venue := .venue | default .published | default .published_in | default "" -}}
+    {{- $url := .url | default "" -}}
+    {{- $gitURL := .git | default .repo | default .code | default "" -}}
+
+    {{- $year := "" -}}
+    {{- $sortkey := "" -}}
+    {{- with .year -}}
+      {{- $year = string . -}}
+      {{- $sortkey = printf "%s-00-00" $year -}}
+    {{- end -}}
+    {{- with .date -}}
+      {{- $dStr := string . -}}
+      {{- if findRE `^\d{4}$` $dStr -}}
+        {{- if not $year }}{{ $year = $dStr }}{{ end -}}
+        {{- $sortkey = printf "%s-00-00" $dStr -}}
+      {{- else -}}
+        {{- $t := time.AsTime . -}}
+        {{- if not $t.IsZero -}}
+          {{- if not $year }}{{ $year = $t.Format "2006" }}{{ end -}}
+          {{- $sortkey = $t.Format "2006-01-02" -}}
+        {{- end -}}
+      {{- end -}}
+    {{- end -}}
+    {{- if not $year -}}
+      {{- warnf "paper_list: %q has no `year` or `date` in content/papers/papers.yaml" .title -}}
+    {{- end -}}
+
+    {{- $pdfURL := "" -}}
+    {{- $rawFile := .file | default .pdf | default "" -}}
+    {{- if $rawFile -}}
+      {{- if or (hasPrefix $rawFile "http://") (hasPrefix $rawFile "https://") -}}
+        {{- $pdfURL = $rawFile -}}
+      {{- else if hasPrefix $rawFile "/" -}}
+        {{- $pdfURL = $rawFile | relURL -}}
+      {{- else -}}
+        {{- $res := $papersPage.Resources.GetMatch $rawFile -}}
+        {{- if not $res -}}
+          {{- $res = resources.Get (printf "papers/%s" $rawFile) | default (resources.Get (printf "publications/%s" $rawFile)) | default (resources.Get $rawFile) -}}
+        {{- end -}}
+        {{- if $res -}}
+          {{- $pdfURL = $res.RelPermalink -}}
+        {{- else -}}
+          {{- warnf "paper_list: %q is listed in content/papers/papers.yaml but missing from content/papers/" $rawFile -}}
+        {{- end -}}
+      {{- end -}}
+    {{- end -}}
+
+    {{- $items = $items | append (dict
+      "title" .title
+      "url" $url
+      "authors" $authors
+      "venue" $venue
+      "year" $year
+      "sortkey" $sortkey
+      "pdfURL" $pdfURL
+      "gitURL" $gitURL
+    ) -}}
+  {{- end -}}
+{{- end -}}
+
+{{- with sort $items "sortkey" "desc" }}
+  {{- $sorted := . -}}
+  {{- $years := slice -}}
+  {{- range $sorted -}}
+    {{- if not (in $years .year) -}}
+      {{- $years = $years | append .year -}}
+    {{- end -}}
+  {{- end -}}
+
+<div class="papers-feed">
+  {{- range $y := $years }}
+  <section class="paper-year-group">
+    {{- if $y }}
+    <h2 class="paper-year">{{ $y }}</h2>
+    {{- end }}
+    <ul class="paper-list">
+      {{- range where $sorted "year" $y }}
+      {{- $pub := . }}
+      <li class="paper-item">
+        <article class="paper-entry">
+          <h3 class="paper-title">
+            {{- with $pub.url -}}
+              <a href="{{ . }}" target="_blank" rel="noopener noreferrer">{{ $pub.title }}<span class="visually-hidden"> (opens in a new tab)</span></a>
+            {{- else -}}
+              {{ $pub.title }}
+            {{- end -}}
+          </h3>
+          {{- with $pub.authors }}
+          <p class="paper-authors">{{ . }}</p>
+          {{- end }}
+          {{- with $pub.venue }}
+          <p class="paper-venue">{{ . }}</p>
+          {{- end }}
+          {{- if or $pub.pdfURL $pub.gitURL }}
+          <div class="paper-actions">
+            {{- with $pub.pdfURL }}
+            <a href="{{ . }}" target="_blank" rel="noopener noreferrer" class="paper-badge" aria-label="PDF for {{ $pub.title }} (opens in a new tab)">
+              <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><line x1="10" y1="9" x2="8" y2="9"/></svg>
+              <span>PDF</span>
+            </a>
+            {{- end }}
+            {{- with $pub.gitURL }}
+            <a href="{{ . }}" target="_blank" rel="noopener noreferrer" class="paper-badge" aria-label="Git repository for {{ $pub.title }} (opens in a new tab)">
+              <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="6" y1="3" x2="6" y2="15"/><circle cx="18" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><path d="M18 9a9 9 0 0 1-9 9"/></svg>
+              <span>Git</span>
+            </a>
+            {{- end }}
+          </div>
+          {{- end }}
+        </article>
+      </li>
+      {{- end }}
+    </ul>
+  </section>
+  {{- end }}
+</div>
+{{- else }}
+<p class="paper-empty">No papers yet.</p>
+{{- end }}

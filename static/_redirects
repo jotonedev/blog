@@ -1,0 +1,4 @@
+# Permanent redirects (HTTP 301)
+/publications      /papers/          301
+/publications/     /papers/          301
+/publications/*    /papers/:splat    301

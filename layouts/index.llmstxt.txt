@@ -17,26 +17,26 @@
 {{ end -}}
 {{ end -}}
 
-{{- $publicationsPage := site.GetPage "/publications" -}}
-{{- $publicationsData := slice -}}
-{{- with $publicationsPage.Resources.GetMatch "publications.yaml" -}}
+{{- $papersPage := site.GetPage "/papers" | default (site.GetPage "/publications") -}}
+{{- $papersData := slice -}}
+{{- with or ($papersPage.Resources.GetMatch "papers.yaml") ($papersPage.Resources.GetMatch "publications.yaml") -}}
   {{- with . | transform.Unmarshal -}}
     {{- if reflect.IsMap . -}}
-      {{- with .publications }}{{ $publicationsData = . }}{{ end -}}
+      {{- with .papers }}{{ $papersData = . }}{{ else }}{{ with .publications }}{{ $papersData = . }}{{ end }}{{ end -}}
     {{- else if reflect.IsSlice . -}}
-      {{- $publicationsData = . -}}
+      {{- $papersData = . -}}
     {{- end -}}
   {{- end -}}
 {{- end -}}
-{{- with $publicationsData }}
-## Publications
+{{- with $papersData }}
+## Papers
 
 {{ range . -}}
-- [{{ .title }}]({{ with .url }}{{ . }}{{ else }}{{ $publicationsPage.Permalink }}{{ end }}): {{ with .venue }}{{ . }}. {{ end }}{{ with .authors }}{{ if reflect.IsSlice . }}{{ delimit . ", " }}{{ else }}{{ . }}{{ end }}{{ end }}
+- [{{ .title }}]({{ with .url }}{{ . }}{{ else }}{{ $papersPage.Permalink }}{{ end }}): {{ with .venue }}{{ . }}. {{ end }}{{ with .authors }}{{ if reflect.IsSlice . }}{{ delimit . ", " }}{{ else }}{{ . }}{{ end }}{{ end }}
 {{ end -}}
 {{ end }}
 ## Optional
 
-- [Publications Archive]({{ "publications/" | absURL }}): Academic papers and research writeups.
+- [Papers Archive]({{ "papers/" | absURL }}): Academic papers and research writeups.
 - [Photos Feed]({{ "photos/" | absURL }}): Photography feed and camera captures.
 - [RSS Feed]({{ "index.xml" | absURL }}): Machine-readable RSS feed of all blog posts.

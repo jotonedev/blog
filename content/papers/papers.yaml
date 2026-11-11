@@ -3,7 +3,7 @@
 #   year:    required, publication year (e.g. 2026) or `date` (YYYY-MM-DD)
 #   url:     optional, external link for the paper title (e.g. arXiv or DOI)
 #   venue:   optional, conference, journal, or workshop where it was published
-#   file:    optional, PDF filename inside content/publications/ (or a URL)
+#   file:    optional, PDF filename inside content/papers/ (or a URL)
 #   git:     optional, URL to the source code repository
 
 #- title: "RESTberus: Trace-Aware Benchmarking of Automated REST API Testing Tools Across Microservice Dependencies"
