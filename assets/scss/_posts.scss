@@ -17,6 +17,11 @@
   text-decoration: none;
   color: inherit;
 
+  &:nth-child(n+5) {
+    content-visibility: auto;
+    contain-intrinsic-size: auto 100px;
+  }
+
   &:hover {
     text-decoration: none;
 

@@ -6,6 +6,11 @@
   margin-block-start: 1.75rem;
 }
 
+.publication-year-group:not(:first-child) {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 300px;
+}
+
 .publication-year {
   font-size: 1.25rem;
   font-weight: 700;

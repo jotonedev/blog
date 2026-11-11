@@ -129,6 +129,13 @@ pre {
   }
 }
 
+// Modern cross-document view transitions for smooth MPA navigation
+@media (prefers-reduced-motion: no-preference) {
+  @view-transition {
+    navigation: auto;
+  }
+}
+
 // Accessible print styles
 @media print {
   .skip-link,

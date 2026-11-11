@@ -8,6 +8,11 @@
 
 .photo-item {
   margin: 0;
+
+  &:not(:first-child) {
+    content-visibility: auto;
+    contain-intrinsic-size: auto 600px;
+  }
 }
 
 .photo-frame {
