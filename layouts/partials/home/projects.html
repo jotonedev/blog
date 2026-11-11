@@ -13,17 +13,37 @@
                                 {{- $res := resources.Get (strings.TrimPrefix "/" .) }}
                                 {{- if $res }}
                                     {{- $isSvg := eq $res.MediaType.SubType "svg" }}
-                                    {{- $w := 900 }}{{ $h := 640 }}
                                     {{- if $isSvg }}
                                         {{- $res = $res | minify | fingerprint }}
+                            <img src="{{ $res.RelPermalink }}" width="900" height="640"
+                                 alt="" loading="lazy" decoding="async" class="is-contained">
                                     {{- else if eq $res.ResourceType "image" }}
-                                        {{- /* Cards are ~300px wide; 640px covers 2x screens. */}}
-                                        {{- if gt $res.Width 640 }}{{ $res = $res.Resize "640x webp q85" }}{{ end }}
-                                        {{- $w = $res.Width }}{{ $h = $res.Height }}
+                                        {{- $widths := slice 320 640 }}
+                                        {{- $chosen := slice }}
+                                        {{- range $widths }}{{ if le . $res.Width }}{{ $chosen = $chosen | append . }}{{ end }}{{ end }}
+                                        {{- if not $chosen }}{{ $chosen = slice $res.Width }}{{ end }}
+
+                                        {{- $avif := slice }}
+                                        {{- $webp := slice }}
+                                        {{- range $chosen }}
+                                            {{- $a := $res.Resize (printf "%dx avif q70" .) }}
+                                            {{- $avif = $avif | append (printf "%s %dw" $a.RelPermalink $a.Width) }}
+                                            {{- $w := $res.Resize (printf "%dx webp q85" .) }}
+                                            {{- $webp = $webp | append (printf "%s %dw" $w.RelPermalink $w.Width) }}
+                                        {{- end }}
+                                        {{- $maxW := index $chosen (sub (len $chosen) 1) }}
+                                        {{- $fallback := $res.Resize (printf "%dx webp q85" $maxW) }}
+                                        {{- $sizes := "(max-width: 600px) 88px, (max-width: 800px) calc(50vw - 2rem), 380px" }}
+                            <picture>
+                                <source type="image/avif" srcset="{{ delimit $avif ", " }}" sizes="{{ $sizes }}">
+                                <source type="image/webp" srcset="{{ delimit $webp ", " }}" sizes="{{ $sizes }}">
+                                <img src="{{ $fallback.RelPermalink }}" width="{{ $fallback.Width }}" height="{{ $fallback.Height }}"
+                                     alt="" loading="lazy" decoding="async">
+                            </picture>
+                                    {{- else }}
+                            <img src="{{ $res.RelPermalink }}" width="900" height="640"
+                                 alt="" loading="lazy" decoding="async">
                                     {{- end }}
-                            <img src="{{ $res.RelPermalink }}" width="{{ $w }}" height="{{ $h }}"
-                                 alt="" loading="lazy" decoding="async"
-                                 {{ if $isSvg }}class="is-contained"{{ end }}>
                                 {{- else }}
                             <img src="{{ . | relURL }}" width="900" height="640"
                                  alt="" loading="lazy" decoding="async">
