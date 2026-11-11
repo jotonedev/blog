@@ -60,7 +60,7 @@
 
 .nav-button {
   padding: 0.5rem 1.25rem;
-  min-block-size: 38px;
+  min-block-size: 40px;
   border-radius: var(--radius-pill);
   font-weight: 600;
   font-size: 0.95rem;
@@ -71,10 +71,14 @@
   justify-content: center;
   transition: var(--transition-interactive);
 
+  @media (pointer: coarse) {
+    min-block-size: 44px;
+    padding-inline: 1rem;
+  }
+
   @media (max-width: 600px) {
     padding: 0.45rem 0.85rem;
     font-size: 0.88rem;
-    min-block-size: 34px;
   }
 
   &:hover {

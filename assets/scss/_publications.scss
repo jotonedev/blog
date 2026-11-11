@@ -89,6 +89,11 @@
   text-decoration: none;
   transition: var(--transition-interactive);
 
+  @media (pointer: coarse) {
+    min-block-size: 44px;
+    padding-inline: 1rem;
+  }
+
   svg {
     inline-size: 14px;
     block-size: 14px;

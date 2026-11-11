@@ -2,4 +2,4 @@
 {{- $external := or (hasPrefix .Destination "http://") (hasPrefix .Destination "https://") (hasPrefix .Destination "//") -}}
 {{- $internal := and $external (hasPrefix .Destination site.BaseURL) -}}
 <a href="{{ .Destination | safeURL }}"{{ with .Title }} title="{{ . }}"{{ end }}
-   {{- if and $external (not $internal) }} target="_blank" rel="noopener noreferrer"{{ end }}>{{ .Text }}</a>{{- "" -}}
+   {{- if and $external (not $internal) }} target="_blank" rel="noopener noreferrer"{{ end }}>{{ .Text }}{{ if and $external (not $internal) }}<span class="visually-hidden"> (opens in a new tab)</span>{{ end }}</a>{{- "" -}}

@@ -34,7 +34,7 @@
                     <div class="row-main">
                         <h3 class="row-title">
                             {{- with $item.url -}}
-                                <a href="{{ . }}" target="_blank" rel="noopener noreferrer">{{ $title }}</a>
+                                <a href="{{ . }}" target="_blank" rel="noopener noreferrer">{{ $title }}<span class="visually-hidden"> (opens in a new tab)</span></a>
                             {{- else -}}
                                 {{ $title }}
                             {{- end -}}
