@@ -6,44 +6,46 @@
         <div class="projects-grid">
             {{- range $data.projects }}
                 {{- $item := . }}
-                <a href="{{ .url }}" target="_blank" rel="noopener noreferrer" class="project-card">
-                    <div class="project-banner">
-                        {{- with $item.banner }}
-                            {{- $res := resources.Get (strings.TrimPrefix "/" .) }}
-                            {{- if $res }}
-                                {{- $isSvg := eq $res.MediaType.SubType "svg" }}
-                                {{- $w := 900 }}{{ $h := 640 }}
-                                {{- if $isSvg }}
-                                    {{- $res = $res | minify | fingerprint }}
-                                {{- else if eq $res.ResourceType "image" }}
-                                    {{- /* Cards are ~300px wide; 640px covers 2x screens. */}}
-                                    {{- if gt $res.Width 640 }}{{ $res = $res.Resize "640x webp q85" }}{{ end }}
-                                    {{- $w = $res.Width }}{{ $h = $res.Height }}
+                <a href="{{ .url }}" target="_blank" rel="noopener noreferrer" class="project-card-link">
+                    <article class="project-card">
+                        <div class="project-banner">
+                            {{- with $item.banner }}
+                                {{- $res := resources.Get (strings.TrimPrefix "/" .) }}
+                                {{- if $res }}
+                                    {{- $isSvg := eq $res.MediaType.SubType "svg" }}
+                                    {{- $w := 900 }}{{ $h := 640 }}
+                                    {{- if $isSvg }}
+                                        {{- $res = $res | minify | fingerprint }}
+                                    {{- else if eq $res.ResourceType "image" }}
+                                        {{- /* Cards are ~300px wide; 640px covers 2x screens. */}}
+                                        {{- if gt $res.Width 640 }}{{ $res = $res.Resize "640x webp q85" }}{{ end }}
+                                        {{- $w = $res.Width }}{{ $h = $res.Height }}
+                                    {{- end }}
+                            <img src="{{ $res.RelPermalink }}" width="{{ $w }}" height="{{ $h }}"
+                                 alt="" loading="lazy" decoding="async"
+                                 {{ if $isSvg }}class="is-contained"{{ end }}>
+                                {{- else }}
+                            <img src="{{ . | relURL }}" width="900" height="640"
+                                 alt="" loading="lazy" decoding="async">
                                 {{- end }}
-                        <img src="{{ $res.RelPermalink }}" width="{{ $w }}" height="{{ $h }}"
-                             alt="" loading="lazy" decoding="async"
-                             {{ if $isSvg }}class="is-contained"{{ end }}>
                             {{- else }}
-                        <img src="{{ . | relURL }}" width="900" height="640"
-                             alt="" loading="lazy" decoding="async">
-                            {{- end }}
-                        {{- else }}
-                        <div class="project-banner-placeholder" aria-hidden="true">{{ $item.title }}</div>
-                        {{- end }}
-                    </div>
-                    <div class="project-body">
-                        <h3 class="project-title">{{ .title }}</h3>
-                        {{- with .description }}
-                        <p class="project-description">{{ . }}</p>
-                        {{- end }}
-                        {{- with .tags }}
-                        <div class="project-tags">
-                            {{- range . }}
-                            <span class="project-tag">{{ . }}</span>
+                            <div class="project-banner-placeholder" aria-hidden="true">{{ $item.title }}</div>
                             {{- end }}
                         </div>
-                        {{- end }}
-                    </div>
+                        <div class="project-body">
+                            <h3 class="project-title">{{ .title }}</h3>
+                            {{- with .description }}
+                            <p class="project-description">{{ . }}</p>
+                            {{- end }}
+                            {{- with .tags }}
+                            <div class="project-tags">
+                                {{- range . }}
+                                <span class="project-tag">{{ . }}</span>
+                                {{- end }}
+                            </div>
+                            {{- end }}
+                        </div>
+                    </article>
                 </a>
             {{- end }}
         </div>

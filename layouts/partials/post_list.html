@@ -14,16 +14,18 @@
 {{- if $posts }}
 <div class="post-cards-list">
     {{- range $posts }}
-    <a href="{{ .RelPermalink }}" class="post-card-item">
-        <div class="post-card-main">
-            <h2 class="post-card-title">{{ .Title }}</h2>
-            {{- with .Summary }}
-            <p class="post-card-summary">{{ . | plainify | chomp | truncate 120 }}</p>
-            {{- end }}
-        </div>
-        <div class="post-card-meta">
-            <time datetime="{{ .Date.Format "2006-01-02T15:04:05Z07:00" }}">{{ .Date | time.Format "Jan 02, 2006" }}</time>
-        </div>
+    <a href="{{ .RelPermalink }}" class="post-card-link">
+        <article class="post-card-item">
+            <div class="post-card-main">
+                <h2 class="post-card-title">{{ .Title }}</h2>
+                {{- with .Summary }}
+                <p class="post-card-summary">{{ . | plainify | chomp | truncate 120 }}</p>
+                {{- end }}
+            </div>
+            <div class="post-card-meta">
+                <time datetime="{{ .Date.Format "2006-01-02T15:04:05Z07:00" }}">{{ .Date | time.Format "Jan 02, 2006" }}</time>
+            </div>
+        </article>
     </a>
     {{- end }}
 </div>

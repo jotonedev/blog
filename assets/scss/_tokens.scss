@@ -2,51 +2,155 @@
 // Component files must never hardcode a hex value.
 
 :root {
+  // MANDATORY: Automatically adapt native UI to user system preferences
   color-scheme: light dark;
 
-  --font-sans: system-ui, -apple-system, 'Segoe UI', sans-serif;
-  --font-mono: ui-monospace, Consolas, monospace;
+  --font-sans: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: ui-monospace, 'Cascadia Code', 'Source Code Pro', Menlo, Consolas, monospace;
 
-  // Surfaces
-  --bg: #fafafa;
-  --surface: #ffffff;
-  --surface-subtle: #f4f4f5;
-  --surface-muted: #e4e4e7;
-  --border: #e4e4e7;
-  --border-subtle: #f4f4f5;
+  // Surfaces - Light & Dark definitions
+  --bg-light: #fafafa;
+  --bg-dark: #0c0c0e;
+  --bg: var(--bg-light);
+
+  --surface-light: #ffffff;
+  --surface-dark: #141417;
+  --surface: var(--surface-light);
+
+  --surface-subtle-light: #f4f4f5;
+  --surface-subtle-dark: #1c1c20;
+  --surface-subtle: var(--surface-subtle-light);
+
+  --surface-muted-light: #e4e4e7;
+  --surface-muted-dark: #27272a;
+  --surface-muted: var(--surface-muted-light);
+
+  --border-light: #e4e4e7;
+  --border-dark: #27272a;
+  --border: var(--border-light);
+
+  --border-subtle-light: #f4f4f5;
+  --border-subtle-dark: #1f1f23;
+  --border-subtle: var(--border-subtle-light);
 
   // Text
-  --text: #18181b;
-  --text-body: #27272a;
-  --text-muted: #52525b;
-  --text-subtle: #71717a;
+  --text-light: #18181b;
+  --text-dark: #fafafa;
+  --text: var(--text-light);
+
+  --text-body-light: #27272a;
+  --text-body-dark: #e4e4e7;
+  --text-body: var(--text-body-light);
+
+  --text-muted-light: #52525b;
+  --text-muted-dark: #a1a1aa;
+  --text-muted: var(--text-muted-light);
+
+  --text-subtle-light: #71717a;
+  --text-subtle-dark: #a1a1aa;
+  --text-subtle: var(--text-subtle-light);
 
   // Accent
-  --accent: #18181b;
-  --accent-hover: #27272a;
-  --on-accent: #fafafa;
-  --accent-shadow: rgba(24, 24, 27, 0.14);
+  --accent-light: #18181b;
+  --accent-dark: #f4f4f5;
+  --accent: var(--accent-light);
+
+  --accent-hover-light: #27272a;
+  --accent-hover-dark: #ffffff;
+  --accent-hover: var(--accent-hover-light);
+
+  --on-accent-light: #fafafa;
+  --on-accent-dark: #0c0c0e;
+  --on-accent: var(--on-accent-light);
+
+  --accent-shadow-light: rgba(24, 24, 27, 0.14);
+  --accent-shadow-dark: rgba(0, 0, 0, 0.35);
+  --accent-shadow: var(--accent-shadow-light);
 
   // Fixed logo backdrops
   --logo-bg-white: #ffffff;
   --logo-bg-black: #000000;
 
   // Elevation
-  --shadow-sm: 0 4px 14px rgba(0, 0, 0, 0.04);
-  --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.08);
+  --shadow-sm-light: 0 4px 14px rgba(0, 0, 0, 0.04);
+  --shadow-sm-dark: 0 4px 14px rgba(0, 0, 0, 0.4);
+  --shadow-sm: var(--shadow-sm-light);
+
+  --shadow-md-light: 0 8px 24px rgba(0, 0, 0, 0.08);
+  --shadow-md-dark: 0 8px 24px rgba(0, 0, 0, 0.5);
+  --shadow-md: var(--shadow-md-light);
+
   --shadow-accent: 0 4px 12px var(--accent-shadow);
 
   // Floating navigation bar
-  --nav-bg: rgba(255, 255, 255, 0.85);
-  --nav-border: rgba(0, 0, 0, 0.08);
-  --nav-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
-  --nav-text: #3f3f46;
+  --nav-bg-light: rgba(255, 255, 255, 0.85);
+  --nav-bg-dark: rgba(20, 20, 23, 0.85);
+  --nav-bg: var(--nav-bg-light);
+
+  --nav-border-light: rgba(0, 0, 0, 0.08);
+  --nav-border-dark: rgba(255, 255, 255, 0.08);
+  --nav-border: var(--nav-border-light);
+
+  --nav-shadow-light: 0 4px 20px rgba(0, 0, 0, 0.06);
+  --nav-shadow-dark: 0 4px 20px rgba(0, 0, 0, 0.45);
+  --nav-shadow: var(--nav-shadow-light);
+
+  --nav-text-light: #3f3f46;
+  --nav-text-dark: #d4d4d8;
+  --nav-text: var(--nav-text-light);
 
   // Code
   --code-bg: #18181b;
   --code-text: #fafafa;
-  --code-inline-bg: #f4f4f5;
-  --code-inline-text: #18181b;
+  --code-inline-bg-light: #f4f4f5;
+  --code-inline-bg-dark: #27272a;
+  --code-inline-bg: var(--code-inline-bg-light);
+
+  --code-inline-text-light: #18181b;
+  --code-inline-text-dark: #e4e4e7;
+  --code-inline-text: var(--code-inline-text-light);
+
+  // Scrollbars
+  --scrollbar-track-light: #f4f4f5;
+  --scrollbar-track-dark: #1c1c20;
+  --scrollbar-track: var(--scrollbar-track-light);
+
+  --scrollbar-thumb-light: #a1a1aa;
+  --scrollbar-thumb-dark: #52525b;
+  --scrollbar-thumb: var(--scrollbar-thumb-light);
+
+  // Browser UI accent and scrollbars
+  accent-color: var(--accent);
+  scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track);
+  scrollbar-width: thin;
+
+  // Modern light-dark() values
+  @supports (color: light-dark(white, black)) {
+    --bg: light-dark(var(--bg-light), var(--bg-dark));
+    --surface: light-dark(var(--surface-light), var(--surface-dark));
+    --surface-subtle: light-dark(var(--surface-subtle-light), var(--surface-subtle-dark));
+    --surface-muted: light-dark(var(--surface-muted-light), var(--surface-muted-dark));
+    --border: light-dark(var(--border-light), var(--border-dark));
+    --border-subtle: light-dark(var(--border-subtle-light), var(--border-subtle-dark));
+    --text: light-dark(var(--text-light), var(--text-dark));
+    --text-body: light-dark(var(--text-body-light), var(--text-body-dark));
+    --text-muted: light-dark(var(--text-muted-light), var(--text-muted-dark));
+    --text-subtle: light-dark(var(--text-subtle-light), var(--text-subtle-dark));
+    --accent: light-dark(var(--accent-light), var(--accent-dark));
+    --accent-hover: light-dark(var(--accent-hover-light), var(--accent-hover-dark));
+    --on-accent: light-dark(var(--on-accent-light), var(--on-accent-dark));
+    --accent-shadow: light-dark(var(--accent-shadow-light), var(--accent-shadow-dark));
+    --shadow-sm: light-dark(var(--shadow-sm-light), var(--shadow-sm-dark));
+    --shadow-md: light-dark(var(--shadow-md-light), var(--shadow-md-dark));
+    --nav-bg: light-dark(var(--nav-bg-light), var(--nav-bg-dark));
+    --nav-border: light-dark(var(--nav-border-light), var(--nav-border-dark));
+    --nav-shadow: light-dark(var(--nav-shadow-light), var(--nav-shadow-dark));
+    --nav-text: light-dark(var(--nav-text-light), var(--nav-text-dark));
+    --code-inline-bg: light-dark(var(--code-inline-bg-light), var(--code-inline-bg-dark));
+    --code-inline-text: light-dark(var(--code-inline-text-light), var(--code-inline-text-dark));
+    --scrollbar-track: light-dark(var(--scrollbar-track-light), var(--scrollbar-track-dark));
+    --scrollbar-thumb: light-dark(var(--scrollbar-thumb-light), var(--scrollbar-thumb-dark));
+  }
 
   // Shape
   --radius-xs: 4px;
@@ -55,7 +159,7 @@
   --radius-lg: 12px;
   --radius-pill: 9999px;
 
-  // Motion.
+  // Motion
   --ease: cubic-bezier(0.4, 0, 0.2, 1);
   --speed-fast: 0.2s;
   --speed: 0.25s;
@@ -70,33 +174,55 @@
   --max-content-width: 800px;
 }
 
+// Fallback for browsers without light-dark support
 @media (prefers-color-scheme: dark) {
   :root {
-    --bg: #0c0c0e;
-    --surface: #141417;
-    --surface-subtle: #1c1c20;
-    --surface-muted: #27272a;
-    --border: #27272a;
-    --border-subtle: #1f1f23;
+    --bg: var(--bg-dark);
+    --surface: var(--surface-dark);
+    --surface-subtle: var(--surface-subtle-dark);
+    --surface-muted: var(--surface-muted-dark);
+    --border: var(--border-dark);
+    --border-subtle: var(--border-subtle-dark);
 
-    --text: #fafafa;
-    --text-body: #e4e4e7;
-    --text-muted: #a1a1aa;
+    --text: var(--text-dark);
+    --text-body: var(--text-body-dark);
+    --text-muted: var(--text-muted-dark);
+    --text-subtle: var(--text-subtle-dark);
 
-    --accent: #f4f4f5;
-    --accent-hover: #ffffff;
-    --on-accent: #0c0c0e;
-    --accent-shadow: rgba(0, 0, 0, 0.35);
+    --accent: var(--accent-dark);
+    --accent-hover: var(--accent-hover-dark);
+    --on-accent: var(--on-accent-dark);
+    --accent-shadow: var(--accent-shadow-dark);
 
-    --shadow-sm: 0 4px 14px rgba(0, 0, 0, 0.4);
-    --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.5);
+    --shadow-sm: var(--shadow-sm-dark);
+    --shadow-md: var(--shadow-md-dark);
 
-    --nav-bg: rgba(20, 20, 23, 0.85);
-    --nav-border: rgba(255, 255, 255, 0.08);
-    --nav-shadow: 0 4px 20px rgba(0, 0, 0, 0.45);
-    --nav-text: #d4d4d8;
+    --nav-bg: var(--nav-bg-dark);
+    --nav-border: var(--nav-border-dark);
+    --nav-shadow: var(--nav-shadow-dark);
+    --nav-text: var(--nav-text-dark);
 
-    --code-inline-bg: #27272a;
-    --code-inline-text: #e4e4e7;
+    --code-inline-bg: var(--code-inline-bg-dark);
+    --code-inline-text: var(--code-inline-text-dark);
+
+    --scrollbar-track: var(--scrollbar-track-dark);
+    --scrollbar-thumb: var(--scrollbar-thumb-dark);
+  }
+}
+
+// Legacy WebKit scrollbar fallback
+@supports not (scrollbar-color: auto) {
+  *::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  *::-webkit-scrollbar-thumb {
+    background: var(--scrollbar-thumb);
+    border-radius: var(--radius-xs);
+  }
+
+  *::-webkit-scrollbar-track {
+    background: var(--scrollbar-track);
   }
 }

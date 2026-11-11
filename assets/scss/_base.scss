@@ -1,6 +1,6 @@
 html {
   box-sizing: border-box;
-  height: 100%;
+  block-size: 100%;
   background-color: var(--bg);
 }
 
@@ -18,28 +18,43 @@ body {
   padding: 0;
   background-color: var(--bg);
   color: var(--text);
-  min-height: 100%;
+  min-block-size: 100%;
+  overflow-wrap: break-word;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
 }
 
 img,
-svg,
 video {
-  max-width: 100%;
-  height: auto;
+  display: block;
+  max-inline-size: 100%;
+  block-size: auto;
+}
+
+svg {
+  max-inline-size: 100%;
+  block-size: auto;
 }
 
 a {
   color: var(--accent);
 }
 
+// Typography: balanced headings and pretty text wrapping for copy
 h1,
 h2,
 h3,
-h4 {
+h4,
+h5,
+h6 {
   color: var(--text);
   text-wrap: balance;
+}
+
+p,
+blockquote,
+li {
+  text-wrap: pretty;
 }
 
 h2 {
@@ -55,9 +70,50 @@ pre {
   font-family: var(--font-mono);
 }
 
+// Accessible visually hidden utility
+.visually-hidden:where(:not(:focus-within, :active)) {
+  position: absolute !important;
+  clip-path: inset(50%) !important;
+  overflow: hidden !important;
+  inline-size: 1px !important;
+  block-size: 1px !important;
+  margin: -1px !important;
+  padding: 0 !important;
+  border: 0 !important;
+  white-space: nowrap !important;
+}
+
+// Skip link for keyboard accessibility
+.skip-link {
+  position: fixed;
+  inset-block-start: 1rem;
+  inset-inline-start: 1rem;
+  z-index: 10000;
+  padding: 0.6rem 1.25rem;
+  background: var(--surface);
+  color: var(--text);
+  border: 2px solid var(--accent);
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-md);
+  font-weight: 600;
+  text-decoration: none;
+
+  &:focus {
+    outline: none;
+  }
+}
+
 // Keyboard navigation stays visible; mouse clicks stay clean.
 :focus-visible {
   @include focus-ring;
+}
+
+// Support Forced Colors Mode (High Contrast on Windows)
+@media (forced-colors: active) {
+  :focus-visible {
+    outline: 2px solid Highlight;
+    outline-offset: 2px;
+  }
 }
 
 // Respect users who ask the OS to tone motion down.
