@@ -130,8 +130,8 @@ pre {
   }
 }
 
-// Modern cross-document view transitions for smooth MPA navigation
-@media (prefers-reduced-motion: no-preference) {
+// Modern cross-document view transitions for smooth MPA navigation (fine pointer only)
+@media (prefers-reduced-motion: no-preference) and (pointer: fine) {
   @view-transition {
     navigation: auto;
   }
